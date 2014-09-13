@@ -1,0 +1,42 @@
+\documentclass[12pt]{article}
+
+% PACKAGES
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{mathtools}
+
+% CUSTOM STYLES
+\providecommand{\e}[1]{\ensuremath{\times 10^{#1}}}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\restylefloat{table}
+
+% METADATA
+\title{FPGA implementation of Cooley-Tukey}
+\date{September 13, 2014}
+\author{Garrett Massman and Cory Walker}
+
+\begin{document}
+
+  \maketitle
+
+  \subsection*{Overview}
+    In this project we will implement the Cooley-Tukey FFT algorithm on a Xilinx FPGA using VHDL.
+  \subsection*{Theory}
+    Describe the definitions of the DFT and the Cooley-Tukey FFT.
+  \subsection*{In Mathematica}
+    Describe Mathematica code, how precomputed tables can help us.
+  \subsection*{FPGA considerations}
+    Describe how we plan to utilize SPI for communication, what type of logical blocks we will use and how they will work together.
+  \subsection*{Block diagram}
+    Insert GraphViz here
+  \subsection*{Roadmap}
+    Describe the steps, in order, that need to be done.
+  \subsection*{Possible extensions}
+    Describe the extra things we might add if we have time.
+  \subsection*{Conclusion}
+
+\end{document}
