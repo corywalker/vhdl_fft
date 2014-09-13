@@ -40,3 +40,4 @@ xilinxsim.ini
 counter_example_pad.txt
 .DS_Store
 proposal.out
+spi_master_slave/syn/
