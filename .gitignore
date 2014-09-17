@@ -47,3 +47,4 @@ spi_master_slave/syn/
 *.xwbt
 *.wdb
 determ_adc_pad.txt
+*.exe

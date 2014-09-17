@@ -29,37 +29,46 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
+--library work;
+--use work.all;
+
 entity determ_adc is
+	generic (   
+	  N : positive := 16
+	  );
   port(CLK1, spi_sck_i: in STD_LOGIC;
   spi_miso_o: out STD_LOGIC);
 end determ_adc;
 
 architecture Behavioral of determ_adc is
 
-component spi_slave
-  port (clk_i: in STD_LOGIC;
-  spi_sck_i: in STD_LOGIC;
-  spi_ssel_i: in STD_LOGIC;
-  di_i: in STD_LOGIC_VECTOR (31 downto 0);
-  wren_i: in STD_LOGIC;
-  spi_miso_o: out STD_LOGIC);
-end component;
-
-signal di_i: STD_LOGIC_VECTOR (31 downto 0);
+signal di_i: STD_LOGIC_VECTOR (N-1 downto 0);
 signal wren_i: STD_LOGIC;
 signal spi_ssel_i: STD_LOGIC;
+signal cnt1_clear: STD_LOGIC;
+signal cnt1_Q: STD_LOGIC_VECTOR (31 downto 0);
 
 begin
 
-	ss1: spi_slave port map (
+	ss1: entity spi_slave
+	  Generic map (N => N)
+	  port map (
 		clk_i => CLK1,
 		spi_sck_i => spi_sck_i,
 		spi_ssel_i => spi_ssel_i,
 		di_i => di_i,
 		wren_i => wren_i,
 		spi_miso_o => spi_miso_o);
+		
+	cnt1: entity counter
+	  Generic map (n => 32)
+	  port map (
+		clock => CLK1,
+		clear => cnt1_clear,
+		count => '1',
+		Q => cnt1_Q);
 
-	di_i <= X"1234ABCD";
+	di_i <= cnt1_Q(31 downto 16);
 	wren_i <= '1';
 	spi_ssel_i <= '0';
 
