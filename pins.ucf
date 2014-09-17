@@ -1,0 +1,21 @@
+# This file is a general .ucf for Basys rev E board
+# To use it in a project:
+# - remove or comment the lines corresponding to unused pins
+# - rename the used signals according to the project
+
+
+# clock pin for Basys rev E Board                                                                                                                        
+# Bank = 2,  Pin name = IO_L5N_2/D3/GCLK31, Sch name = CLK1
+NET "CLK1" LOC = P54;
+#NET "Clk2"      LOC = "P53"; # Bank = 2,  Pin name = IO_L5P_2/D4/GCLK30, Sch name = CLK2
+                                                                                                                        
+# 6 pin connectors                                                                                                                        
+# Bank = 1, Pin name = IO_L3P_1/A12,            Sch name = JA-1
+NET "spi_sck_i" LOC = P81;
+# Bank = 1, Pin name = IO_L6P_1/A6/GCLK8/IRDY1, Sch name = JA-2
+NET "spi_miso_o" LOC = P91;
+
+# PlanAhead Generated IO constraints 
+
+NET "CLK1" IOSTANDARD = LVCMOS25;
+NET "spi_sck_i" CLOCK_DEDICATED_ROUTE = FALSE;

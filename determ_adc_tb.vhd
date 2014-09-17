@@ -2,15 +2,15 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   19:45:43 09/06/2014
+-- Create Date:   01:13:01 09/17/2014
 -- Design Name:   
--- Module Name:   C:/Users/John/Code/fft/fft_tb.vhd
--- Project Name:  fft
+-- Module Name:   C:/Users/John/Downloads/spi_master_slave/trunk/spi_clean/determ_adc_tb.vhd
+-- Project Name:  spi_clean
 -- Target Device:  
 -- Tool versions:  
 -- Description:   
 -- 
--- VHDL Test Bench Created by ISE for module: counter_example
+-- VHDL Test Bench Created by ISE for module: determ_adc
 -- 
 -- Dependencies:
 -- 
@@ -32,54 +32,56 @@ USE ieee.std_logic_1164.ALL;
 -- arithmetic functions with Signed or Unsigned values
 --USE ieee.numeric_std.ALL;
  
-ENTITY fft_tb IS
-END fft_tb;
+ENTITY determ_adc_tb IS
+END determ_adc_tb;
  
-ARCHITECTURE behavior OF fft_tb IS 
+ARCHITECTURE behavior OF determ_adc_tb IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT counter_example
+    COMPONENT determ_adc
     PORT(
-         CLK : IN  std_logic;
-         RESET : IN  std_logic;
-         LOAD : IN  std_logic;
-         DATA : IN  std_logic_vector(31 downto 0);
-         Q : OUT  std_logic_vector(31 downto 0)
+         CLK1 : IN  std_logic;
+         spi_sck_i : IN  std_logic;
+         spi_miso_o : OUT  std_logic
         );
     END COMPONENT;
     
 
    --Inputs
-   signal CLK : std_logic := '0';
-   signal RESET : std_logic := '0';
-   signal LOAD : std_logic := '0';
-   signal DATA : std_logic_vector(31 downto 0) := (others => '0');
+   signal CLK1 : std_logic := '0';
+   signal spi_sck_i : std_logic := '0';
 
  	--Outputs
-   signal Q : std_logic_vector(31 downto 0);
+   signal spi_miso_o : std_logic;
 
    -- Clock period definitions
-   constant CLK_period : time := 10 ns;
+   constant CLK1_period : time := 10 ns;
  
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: counter_example PORT MAP (
-          CLK => CLK,
-          RESET => RESET,
-          LOAD => LOAD,
-          DATA => DATA,
-          Q => Q
+   uut: determ_adc PORT MAP (
+          CLK1 => CLK1,
+          spi_sck_i => spi_sck_i,
+          spi_miso_o => spi_miso_o
         );
 
    -- Clock process definitions
-   CLK_process :process
+   CLK1_process :process
    begin
-		CLK <= '0';
-		wait for CLK_period/2;
-		CLK <= '1';
-		wait for CLK_period/2;
+		CLK1 <= '0';
+		wait for CLK1_period/2;
+		CLK1 <= '1';
+		wait for CLK1_period/2;
+   end process;
+	
+   spi_sck_i_process :process
+   begin
+		spi_sck_i <= '0';
+		wait for CLK1_period;
+		spi_sck_i <= '1';
+		wait for CLK1_period;
    end process;
  
 
@@ -89,7 +91,7 @@ BEGIN
       -- hold reset state for 100 ns.
       wait for 100 ns;	
 
-      wait for CLK_period*10;
+      wait for CLK1_period*100;
 
       -- insert stimulus here 
 

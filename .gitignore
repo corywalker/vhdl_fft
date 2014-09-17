@@ -41,3 +41,9 @@ counter_example_pad.txt
 .DS_Store
 proposal.out
 spi_master_slave/syn/
+*.bgn
+*.drc
+*.ut
+*.xwbt
+*.wdb
+determ_adc_pad.txt
