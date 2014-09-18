@@ -26,7 +26,7 @@ end counter;
 
 architecture behv of counter is		 	  
 	
-    signal Pre_Q: std_logic_vector(n-1 downto 0);
+    signal Pre_Q: std_logic_vector(n-1 downto 0) := (others => '0');
 
 begin
 

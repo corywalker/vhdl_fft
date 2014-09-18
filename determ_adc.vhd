@@ -50,7 +50,6 @@ signal spi_ssel_i: STD_LOGIC;
 signal cnt1_clear: STD_LOGIC;
 signal cnt1_Q: UNSIGNED (31 downto 0);
 signal cnt1_Q_v: std_logic_vector (31 downto 0);
-signal sig1_state: unsigned (3 downto 0) := "0001";
 
 begin
 
@@ -74,14 +73,15 @@ begin
 		Q => cnt1_Q_v);
 		
 		process(di_req_o, cnt1_Q)
+			variable sig1_state : unsigned (3 downto 0) := "0000";
 		begin
 			if(di_req_o'event and di_req_o='1') then
-				sig1_state <= sig1_state + 1;
-				di_i <= std_logic_vector(sig1_state) & "000000000000";
+				sig1_state := sig1_state + 1;
 			end if;
 			if(cnt1_q = 125000000) then
-				sig1_state <= (sig1_state'range => '0');
+				sig1_state := "0000";
 			end if;
+			di_i <= std_logic_vector(sig1_state) & "000000000000";
 		end process;
 
 	wren_i <= '1';
