@@ -19,6 +19,7 @@
 ----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.numeric_std.ALL;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -42,35 +43,51 @@ end determ_adc;
 
 architecture Behavioral of determ_adc is
 
-signal di_i: STD_LOGIC_VECTOR (N-1 downto 0);
+signal di_i: STD_LOGIC_VECTOR (N-1 downto 0) := (others => '0');
+signal di_req_o: STD_LOGIC;
 signal wren_i: STD_LOGIC;
 signal spi_ssel_i: STD_LOGIC;
 signal cnt1_clear: STD_LOGIC;
-signal cnt1_Q: STD_LOGIC_VECTOR (31 downto 0);
+signal cnt1_Q: UNSIGNED (31 downto 0);
+signal cnt1_Q_v: std_logic_vector (31 downto 0);
+signal sig1_state: unsigned (3 downto 0) := "0001";
 
 begin
 
-	ss1: entity spi_slave
+	ss1: entity work.spi_slave
 	  Generic map (N => N)
 	  port map (
 		clk_i => CLK1,
 		spi_sck_i => spi_sck_i,
 		spi_ssel_i => spi_ssel_i,
 		di_i => di_i,
+		di_req_o => di_req_o,
 		wren_i => wren_i,
 		spi_miso_o => spi_miso_o);
 		
-	cnt1: entity counter
+	cnt1: entity work.counter
 	  Generic map (n => 32)
 	  port map (
 		clock => CLK1,
 		clear => cnt1_clear,
 		count => '1',
-		Q => cnt1_Q);
+		Q => cnt1_Q_v);
+		
+		process(di_req_o, cnt1_Q)
+		begin
+			if(di_req_o'event and di_req_o='1') then
+				sig1_state <= sig1_state + 1;
+				di_i <= std_logic_vector(sig1_state) & "000000000000";
+			end if;
+			if(cnt1_q = 125000000) then
+				sig1_state <= (sig1_state'range => '0');
+			end if;
+		end process;
 
-	di_i <= cnt1_Q(31 downto 16);
 	wren_i <= '1';
 	spi_ssel_i <= '0';
+	cnt1_clear <= di_req_o;
+	cnt1_Q <= unsigned(cnt1_Q_v);
 
 end Behavioral;
 
