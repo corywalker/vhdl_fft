@@ -13,6 +13,31 @@
 % CUSTOM STYLES
 \providecommand{\e}[1]{\ensuremath{\times 10^{#1}}}
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Mathematica,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true
+  tabsize=3
+}
+
 \restylefloat{table}
 
 % METADATA
@@ -79,7 +104,42 @@
 
 
   \subsection*{In Mathematica}
-    Describe Mathematica code, how precomputed tables can help us.
+  We implemented a candidate version of the Cooley-Tukey algorithm in Mathematica. This code shows how it is possible to build a look up table of calculated results against the variables $N$ and $k$ for the calculation $e^{-\frac{2\pi i}{N} k}$. This table will not only save us time, but also complexity in the design by allowing us to simply look up this value.
+  \begin{lstlisting}
+myfasterft[x_, capn_, s_, precomputed_] := (
+   result = {};
+   If[capn == 1,
+    result = Append[result, x[[1]]],
+    result = Join[result, myfasterft[x, capn/2, 2 s, precomputed]];
+    result = 
+     Join[result, myfasterft[x[[s + 1 ;;]], capn/2, 2 s, precomputed]];
+    Do[
+     t = result[[k + 1]];
+     result[[k + 1]] = 
+      t + precomputed[[Log2[capn]]][[k + 1]]*
+        result[[k + capn/2 + 1]];
+     result[[k + capn/2 + 1]] = 
+      t - precomputed[[Log2[capn]]][[k + 1]]*
+        result[[k + capn/2 + 1]];
+     , {k, 0, capn/2 - 1}];
+    ];
+   result
+   );
+
+precomputedmatrix[datalen_] := (
+  Table[
+   Table[
+    E^(-I*2*\[Pi]*k/capn),
+    {k, 0., datalen/2 - 1}
+    ],
+   {capn, Table[2^x, {x, 1, Log2[datalen]}]}
+   ]
+  )
+
+data = Table[N[Sin[30 2 Pi n/200] + (RandomReal[] - 1/2)], {n, 512}];
+precomputed = precomputedmatrix[Length[data]];
+ListLinePlot[Abs[myfasterft[data, Length[data], 1, precomputed]], PlotRange -> All]
+  \end{lstlisting}
   \subsection*{FPGA considerations}
     %Describe how we plan to utilize SPI for communication, what type of logical blocks we will use and how they will work together.
     Because we are working with a very specialized type of hardware, we must take into consideration some limiting parameters.
@@ -119,12 +179,27 @@
     \end{figure}
     Now that we have divided the device into several logical blocks, we can now split up the work accordingly.
   \subsection*{Roadmap}
-    Describe the steps, in order, that need to be done.
+    In this section, we will describe the steps, in order, that need to be done. Our steps will essentially follow the data pipeline of the module:
+    \begin{itemize}
+      \item We will begin by implementing a deterministic "ADC" module that will emulate the interface of the real ADC but generate a fixed signal every time. We will use this signal in our own calculations so that we can then verify the outputs of the chip at each stage in the data pipeline. When we are ready to convert to real ADC signals, we can simply switch to an external ADC module using an SPI mux. This step has already been completed.
+      \item We will then implement the capture controller. This controller will have an SPI master unit that can read from the ADC. It will be also connected to the block RAM to write the input buffer.
+      \item Next, we will work on the heart of the chip, the FT controller. This controller will first simply implement the DFT algorithm. It will utilize the complex number ALU to make calculations.
+      \item After the FT controller, we will implement an OUTBUF interpreter that is responsible for outputting the results of the FT controller to the rest of the world using SPI.
+      \item Once all of this is done, we will finish converting our FT controller from using the simple DFT algorithm to the more complex Cooley-Tukey FFT algorithm.
+      \item If we have further time still, we will build interesting demonstrations of this device.
+    \end{itemize}
   \subsection*{Resources}
-    List of resources that we plan to use.
-    %http://opencores.org/project,spi_master_slave
+    While our aim is to implement the entire Fast Fourier Transform with our own code, there are some blocks of our design that are common practice to reuse. Those blocks are the SPI modules. While SPI is not a complicated communication protocol, it requires a fair amount of time to implement. There is a great resource online called OpenCores. This resource is essentially a collection of open source HDL modules that can be freely used in designs. We will be using the "SPI Master/Slave Interface" module a few times in our design to implement SPI.
   \subsection*{Possible extensions}
-    Describe the extra things we might add if we have time.
+    The Fast Fourier Transform algorithm applied to an arbitrary voltage signal is very useful. Because our final chip will provide such capability, we have the option of using our newly-designed chip with multiple different applications. \\
+  
+    One of our ideas is to attach a microphone and a preamp and use the frequency-domain signal to determine the musical note being played. We could also build a tuner for a guitar. \\
+    
+    Additionally, we could connect an audio signal directly from any music player and display a graphic equalizer effect using either a computer or microcontroller that will interface with our chip. \\
+
+    Finally, provided we are able to tune our chip and ADC to operate fast enough, we might be able to build a radio wave analyzer for very long wavelength signals. This device would almost certainly be too slow for any serious RF work, but it would still be an interesting extension. \\
+
+    These extensions are not crucial to our design but might serve as a great demonstration when we present the device to the class.
   \subsection*{Conclusion}
 
   \begin{thebibliography}{9}
@@ -132,14 +207,14 @@
       Doin, Jonny. \emph{SPI Master/Slave Interface.} OpenCores, 16 May 2011. Web. 13 Sept. 2014. \textless\url{http://opencores.org/project,spi_master_slave}\textgreater.
     \bibitem{reynwar}
       Reynwar, Ben. \emph{FFT on an FPGA.} FFT on an FPGA. N.p., n.d. Web. 13 Sept. 2014. \textless\url{http://www.reynwar.net/ben/docs/fft_dit/index.html}\textgreater.
+    \bibitem{roberts}
+      Roberts, Michael J. \emph{Signals and Systems: Analysis Using Transform Methods and MATLAB.} New York: McGraw Hill, 2012. Print.
     \bibitem{satoh}
       Satoh, Keiichi, Jubee Tada, Kenta Yamaguchi, and Yasutaka Tamura. \emph{Complex Multiplier Suited for FPGA Structure.} Computers and Communications (2008): 341-44. Web. 13 Sept. 2014.
     \bibitem{tukey}
       Wikipedia contributors. \emph{Cooley–Tukey FFT algorithm.} Wikipedia, The Free Encyclopedia. Wikipedia, The Free Encyclopedia, 27 Jun. 2014. Web. 13 Sep. 2014.
     \bibitem{dft}
       Wikipedia contributors. \emph{Discrete Fourier transform.} Wikipedia, The Free Encyclopedia. Wikipedia, The Free Encyclopedia, 2 Sep. 2014. Web. 13 Sep. 2014.
-    \bibitem{roberts}
-      Roberts, Michael J. \emph{Signals and Systems: Analysis Using Transform Methods and MATLAB.} New York: McGraw Hill, 2012. Print.
   \end{thebibliography}
 
 \end{document}
