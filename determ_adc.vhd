@@ -18,13 +18,14 @@ end determ_adc;
 
 architecture Behavioral of determ_adc is
 
-    signal di_i: std_logic_vector (N-1 downto 0) := (others => '0');
+    signal di_i: std_logic_vector (N-1 downto 0) := "1010101010101010";
     signal di_req_o: std_logic;
-    signal wren_i: std_logic;
+    signal wren_i: std_logic := '0';
     signal spi_ssel_i: std_logic;
     signal cnt1_clear: std_logic;
     signal cnt1_Q: unsigned (31 downto 0);
     signal cnt1_Q_v: std_logic_vector (31 downto 0);
+    signal state_debug: unsigned (3 downto 0) := "0000";
 
 begin
 
@@ -49,23 +50,29 @@ begin
             Q => cnt1_Q_v
         );
 		
-    process(di_req_o, cnt1_Q)
+    process(CLK1)
         variable sig1_state : unsigned (3 downto 0) := "0000";
     begin
     
-        if(di_req_o'event and di_req_o='1') then
-            sig1_state := sig1_state + 1;
-        end if;
-        
-        if(cnt1_q = 125000000) then
+        if sig1_state = "0000" and falling_edge(CLK1) and di_req_o = '1' then
+            sig1_state := "0001";
+        elsif sig1_state = "0001" and rising_edge(CLK1) then
+            sig1_state := "0010";
+            di_i <= not di_i;
+        elsif sig1_state = "0010" and rising_edge(CLK1) then
+            sig1_state := "0011";
+        elsif sig1_state = "0011" and rising_edge(CLK1) then
+            sig1_state := "0100";
+            wren_i <= '1';
+        elsif sig1_state = "0100" and rising_edge(CLK1) then
             sig1_state := "0000";
+            wren_i <= '0';
         end if;
         
-        di_i <= std_logic_vector(sig1_state) & "000000000000";
-        
+        state_debug <= sig1_state;
+
     end process;
 
-    wren_i <= '1';
     spi_ssel_i <= '0';
     cnt1_clear <= di_req_o;
     cnt1_Q <= unsigned(cnt1_Q_v);

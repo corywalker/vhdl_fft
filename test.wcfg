@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="C:/Users/John/Code/vhdl_fft/determ_adc_tb_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="determ_adc_tb" />
+            <top_module name="numeric_std" />
+            <top_module name="std_logic_1164" />
+            <top_module name="std_logic_arith" />
+            <top_module name="std_logic_unsigned" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="8" />
+   <wvobject fp_name="/determ_adc_tb/clk1" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">clk1</obj_property>
+      <obj_property name="ObjectShortName">clk1</obj_property>
+   </wvobject>
+   <wvobject fp_name="/determ_adc_tb/spi_sck_i" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">spi_sck_i</obj_property>
+      <obj_property name="ObjectShortName">spi_sck_i</obj_property>
+   </wvobject>
+   <wvobject fp_name="/determ_adc_tb/spi_miso_o" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">spi_miso_o</obj_property>
+      <obj_property name="ObjectShortName">spi_miso_o</obj_property>
+   </wvobject>
+   <wvobject fp_name="/determ_adc_tb/clk1_period" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">clk1_period</obj_property>
+      <obj_property name="ObjectShortName">clk1_period</obj_property>
+   </wvobject>
+   <wvobject fp_name="/determ_adc_tb/uut/di_i" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">di_i[15:0]</obj_property>
+      <obj_property name="ObjectShortName">di_i[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/determ_adc_tb/uut/di_req_o" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">di_req_o</obj_property>
+      <obj_property name="ObjectShortName">di_req_o</obj_property>
+   </wvobject>
+   <wvobject fp_name="/determ_adc_tb/uut/wren_i" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">wren_i</obj_property>
+      <obj_property name="ObjectShortName">wren_i</obj_property>
+   </wvobject>
+   <wvobject fp_name="/determ_adc_tb/uut/state_debug" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">state_debug[3:0]</obj_property>
+      <obj_property name="ObjectShortName">state_debug[3:0]</obj_property>
+   </wvobject>
+</wave_config>
