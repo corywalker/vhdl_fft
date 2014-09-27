@@ -9,7 +9,7 @@ entity determ_adc is
         N : positive := 16
     );
 	port(
-        CLK1, spi_sck_i, spi_ssel_i: in std_logic;
+        CLK1, spi_sck_i: in std_logic;
         spi_miso_o: out std_logic
     );
 end determ_adc;
@@ -25,6 +25,7 @@ architecture Behavioral of determ_adc is
     signal di_i: std_logic_vector (N-1 downto 0) := "0000000000000000";
     signal di_req_o: std_logic;
     signal wren_i: std_logic := '0';
+    signal spi_ssel_i: std_logic;
     signal cnt1_clear: std_logic;
     signal cnt1_Q: unsigned (31 downto 0);
     signal cnt1_Q_v: std_logic_vector (31 downto 0);
@@ -122,7 +123,7 @@ begin
     end process;
     
 
-    --spi_ssel_i <= '0';
+    spi_ssel_i <= '0';
     cnt1_clear <= di_req_o;
     cnt1_Q <= unsigned(cnt1_Q_v);
 

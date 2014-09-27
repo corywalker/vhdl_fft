@@ -44,7 +44,6 @@ ARCHITECTURE behavior OF determ_adc_tb IS
     PORT(
          CLK1 : IN  std_logic;
          spi_sck_i : IN  std_logic;
-         spi_ssel_i : IN  std_logic;
          spi_miso_o : OUT  std_logic
         );
     END COMPONENT;
@@ -52,7 +51,6 @@ ARCHITECTURE behavior OF determ_adc_tb IS
 
    --Inputs
    signal CLK1 : std_logic := '0';
-   signal spi_ssel_i : std_logic := '0';
    signal spi_sck_i : std_logic := '0';
 
  	--Outputs
@@ -69,7 +67,6 @@ BEGIN
    uut: determ_adc PORT MAP (
           CLK1 => CLK1,
           spi_sck_i => spi_sck_i,
-          spi_ssel_i => spi_ssel_i,
           spi_miso_o => spi_miso_o
         );
 
@@ -101,11 +98,7 @@ BEGIN
           wait for CLK1_period * 16;
        end loop;
        
-       wait for 1700 ns;
-       spi_ssel_i <= '1';
-       wait for clk1_period*2;
-       spi_ssel_i <= '0';
-       wait for 300 ns;
+       wait for 2000 ns;
        
       for J in 0 to 7 loop
           for I in 0 to 7 loop
