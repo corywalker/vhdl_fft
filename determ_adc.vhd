@@ -25,7 +25,7 @@ architecture Behavioral of determ_adc is
     signal di_i: std_logic_vector (N-1 downto 0) := "0000000000000000";
     signal di_req_o: std_logic;
     signal wren_i: std_logic := '0';
-    signal spi_ssel_i: std_logic;
+    signal spi_ssel_i: std_logic := '1';
     signal cnt1_clear: std_logic;
     signal cnt1_Q: unsigned (31 downto 0);
     signal cnt1_Q_v: std_logic_vector (31 downto 0);
@@ -69,10 +69,11 @@ begin
     process(s_read_state, CLK1)
         variable currcount: unsigned (3 downto 0) := "0000";
     begin
-        --if(cnt1_Q = 125000000) then
-        if cnt1_Q = 100 then
+        if(cnt1_Q = 125000000) then
+        --if cnt1_Q = 100 then
             currcount := "0000";
             next_s_read_state <= "0001";
+            spi_ssel_i <= '1';
         elsif rising_edge(CLK1) then
             case s_read_state is
                 when "0000" =>
@@ -85,6 +86,9 @@ begin
                 when "0010" =>
                     next_s_read_state <= "0011";
                     currcount := currcount + 1;
+                    -- We toggle ssel like this because it resets the position
+                    -- if we change our mind about di_i.
+                    spi_ssel_i <= '0';
                 when "0011" =>
                     next_s_read_state <= "0100";
                 when "0100" =>
@@ -122,8 +126,6 @@ begin
 
     end process;
     
-
-    spi_ssel_i <= '0';
     cnt1_clear <= di_req_o;
     cnt1_Q <= unsigned(cnt1_Q_v);
 
