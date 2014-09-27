@@ -13,7 +13,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="12" />
+   <WVObjectSize size="13" />
    <wvobject fp_name="/determ_adc_tb/clk1" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">clk1</obj_property>
       <obj_property name="ObjectShortName">clk1</obj_property>
@@ -62,5 +62,9 @@
       <obj_property name="ElementShortName">q[31:0]</obj_property>
       <obj_property name="ObjectShortName">q[31:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/determ_adc_tb/spi_ssel_i" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">spi_ssel_i</obj_property>
+      <obj_property name="ObjectShortName">spi_ssel_i</obj_property>
    </wvobject>
 </wave_config>
