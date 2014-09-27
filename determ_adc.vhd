@@ -31,7 +31,7 @@ architecture Behavioral of determ_adc is
     signal cnt1_Q_v: std_logic_vector (31 downto 0);
     signal slower_spi_clock: std_logic := '0';
     signal s_read_state: unsigned (3 downto 0) := "0000";
-    signal next_s_read_state: unsigned (3 downto 0) := "0000";
+    signal next_s_read_state: unsigned (3 downto 0) := "0010";
 
 begin
 

@@ -27,6 +27,7 @@
 --------------------------------------------------------------------------------
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
+use ieee.std_logic_unsigned.all;
  
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -57,6 +58,8 @@ ARCHITECTURE behavior OF determ_adc_tb IS
 
    -- Clock period definitions
    constant CLK1_period : time := 10 ns;
+   
+   signal cnt: std_logic_vector(3 downto 0) := (others => '0');
  
 BEGIN
  
@@ -75,15 +78,6 @@ BEGIN
 		CLK1 <= '1';
 		wait for CLK1_period/2;
    end process;
-	
-   spi_sck_i_process :process
-   begin
-		spi_sck_i <= '0';
-		wait for CLK1_period*2;
-		spi_sck_i <= '1';
-		wait for CLK1_period*2;
-   end process;
- 
 
    -- Stimulus process
    stim_proc: process
@@ -94,6 +88,15 @@ BEGIN
       wait for CLK1_period*100;
 
       -- insert stimulus here 
+      for J in 0 to 7 loop
+          for I in 0 to 7 loop
+            spi_sck_i <= '1';
+            wait for CLK1_period*2;
+            spi_sck_i <= '0';
+            wait for CLK1_period*2;
+          end loop;
+          wait for CLK1_period * 16;
+       end loop;
 
       wait;
    end process;
