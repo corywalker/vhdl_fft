@@ -97,6 +97,18 @@ BEGIN
           end loop;
           wait for CLK1_period * 16;
        end loop;
+       
+       wait for 2000 ns;
+       
+      for J in 0 to 7 loop
+          for I in 0 to 7 loop
+            spi_sck_i <= '1';
+            wait for CLK1_period*2;
+            spi_sck_i <= '0';
+            wait for CLK1_period*2;
+          end loop;
+          wait for CLK1_period * 16;
+       end loop;
 
       wait;
    end process;

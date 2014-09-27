@@ -22,7 +22,7 @@ architecture Behavioral of determ_adc is
     type state_type is (s0,s1,s2,s3,s4);  --type of state machine.
     signal current_s,next_s: state_type;  --current and next state declaration.
 
-    signal di_i: std_logic_vector (N-1 downto 0) := "1010101010101010";
+    signal di_i: std_logic_vector (N-1 downto 0) := "0000000000000000";
     signal di_req_o: std_logic;
     signal wren_i: std_logic := '0';
     signal spi_ssel_i: std_logic;
@@ -67,8 +67,13 @@ begin
     end process;
     
     process(s_read_state, CLK1)
+        variable currcount: unsigned (3 downto 0) := "0000";
     begin
-        if rising_edge(CLK1) then
+        if(cnt1_Q = 125000000) then
+        --if cnt1_Q = 100 then
+            currcount := "0000";
+            next_s_read_state <= "0001";
+        elsif rising_edge(CLK1) then
             case s_read_state is
                 when "0000" =>
                     if di_req_o = '1' then
@@ -76,9 +81,10 @@ begin
                     end if;
                 when "0001" =>
                     next_s_read_state <= "0010";
-                    di_i <= not di_i;
+                    di_i <= std_logic_vector(currcount) & "000000000000";
                 when "0010" =>
                     next_s_read_state <= "0011";
+                    currcount := currcount + 1;
                 when "0011" =>
                     next_s_read_state <= "0100";
                 when "0100" =>
@@ -115,6 +121,7 @@ begin
 --        end if;
 
     end process;
+    
 
     spi_ssel_i <= '0';
     cnt1_clear <= di_req_o;
