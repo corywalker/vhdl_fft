@@ -1,0 +1,3 @@
+screen /dev/tty.usbserial-A800crT2 115200
+
+Be sure to set the second voltage option when connecting using the Bus Pirate.
