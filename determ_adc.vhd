@@ -18,6 +18,10 @@ end determ_adc;
 
 architecture Behavioral of determ_adc is
 
+
+    type state_type is (s0,s1,s2,s3,s4);  --type of state machine.
+    signal current_s,next_s: state_type;  --current and next state declaration.
+
     signal di_i: std_logic_vector (N-1 downto 0) := "1010101010101010";
     signal di_req_o: std_logic;
     signal wren_i: std_logic := '0';
@@ -25,7 +29,8 @@ architecture Behavioral of determ_adc is
     signal cnt1_clear: std_logic;
     signal cnt1_Q: unsigned (31 downto 0);
     signal cnt1_Q_v: std_logic_vector (31 downto 0);
-    signal state_debug: unsigned (3 downto 0) := "0000";
+    signal s_read_state: unsigned (3 downto 0) := "0000";
+    signal next_s_read_state: unsigned (3 downto 0) := "0000";
 
 begin
 
@@ -51,25 +56,49 @@ begin
         );
 		
     process(CLK1)
-        variable sig1_state : unsigned (3 downto 0) := "0000";
     begin
     
-        if sig1_state = "0000" and falling_edge(CLK1) and di_req_o = '1' then
-            sig1_state := "0001";
-        elsif sig1_state = "0001" and rising_edge(CLK1) then
-            sig1_state := "0010";
-            di_i <= not di_i;
-        elsif sig1_state = "0010" and rising_edge(CLK1) then
-            sig1_state := "0011";
-        elsif sig1_state = "0011" and rising_edge(CLK1) then
-            sig1_state := "0100";
-            wren_i <= '1';
-        elsif sig1_state = "0100" and rising_edge(CLK1) then
-            sig1_state := "0000";
-            wren_i <= '0';
+        s_read_state <= next_s_read_state;
+    
+    end process;
+    
+    process(s_read_state, CLK1)
+    begin
+        if rising_edge(CLK1) then
+            case s_read_state is
+                when "0000" =>
+                    if di_req_o = '1' then
+                        next_s_read_state <= "0001";
+                    end if;
+                when "0001" =>
+                    next_s_read_state <= "0010";
+                    di_i <= not di_i;
+                when "0010" =>
+                    next_s_read_state <= "0011";
+                when "0011" =>
+                    next_s_read_state <= "0100";
+                    wren_i <= '1';
+                when "0100" =>
+                    next_s_read_state <= "0000";
+                    wren_i <= '0';
+                when others =>
+                    next_s_read_state <= "0000";
+            end case;
         end if;
-        
-        state_debug <= sig1_state;
+--        if s_read_state = "0000" and falling_edge(CLK1) and di_req_o = '1' then
+--            next_s_read_state <= "0001";
+--        elsif s_read_state = "0001" and rising_edge(CLK1) then
+--            next_s_read_state <= "0010";
+--            --di_i <= not di_i;
+--        elsif s_read_state = "0010" and rising_edge(CLK1) then
+--            next_s_read_state <= "0011";
+--        elsif s_read_state = "0011" and rising_edge(CLK1) then
+--            next_s_read_state <= "0100";
+--            --wren_i <= '1';
+--        elsif s_read_state = "0100" and rising_edge(CLK1) then
+--            next_s_read_state <= "0000";
+--            --wren_i <= '0';
+--        end if;
 
     end process;
 
