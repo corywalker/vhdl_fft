@@ -79,9 +79,9 @@ BEGIN
    spi_sck_i_process :process
    begin
 		spi_sck_i <= '0';
-		wait for CLK1_period;
+		wait for CLK1_period*2;
 		spi_sck_i <= '1';
-		wait for CLK1_period;
+		wait for CLK1_period*2;
    end process;
  
 

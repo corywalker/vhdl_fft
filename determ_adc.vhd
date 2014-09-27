@@ -29,6 +29,7 @@ architecture Behavioral of determ_adc is
     signal cnt1_clear: std_logic;
     signal cnt1_Q: unsigned (31 downto 0);
     signal cnt1_Q_v: std_logic_vector (31 downto 0);
+    signal slower_spi_clock: std_logic := '0';
     signal s_read_state: unsigned (3 downto 0) := "0000";
     signal next_s_read_state: unsigned (3 downto 0) := "0000";
 
@@ -37,7 +38,7 @@ begin
     ss1: entity work.spi_slave
         generic map (N => N)
         port map (
-            clk_i => CLK1,
+            clk_i => slower_spi_clock,
             spi_sck_i => spi_sck_i,
             spi_ssel_i => spi_ssel_i,
             di_i => di_i,
@@ -59,6 +60,9 @@ begin
     begin
     
         s_read_state <= next_s_read_state;
+        if rising_edge(CLK1) then
+            slower_spi_clock <= not slower_spi_clock;
+        end if;
     
     end process;
     
@@ -77,8 +81,18 @@ begin
                     next_s_read_state <= "0011";
                 when "0011" =>
                     next_s_read_state <= "0100";
-                    wren_i <= '1';
                 when "0100" =>
+                    next_s_read_state <= "0101";
+                when "0101" =>
+                    next_s_read_state <= "0110";
+                    wren_i <= '1';
+                    
+                when "0110" =>
+                    next_s_read_state <= "0111";
+                when "0111" =>
+                    next_s_read_state <= "1000";
+                    
+                when "1000" =>
                     next_s_read_state <= "0000";
                     wren_i <= '0';
                 when others =>
