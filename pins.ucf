@@ -11,11 +11,11 @@ NET "CLK1" LOC = P54;
                                                                                                                         
 # 6 pin connectors                                                                                                                        
 # Bank = 1, Pin name = IO_L3P_1/A12,            Sch name = JA-1
-NET "spi_sck_i" LOC = P81;
+#NET "spi_sck_i" LOC = P81;
 # Bank = 1, Pin name = IO_L6P_1/A6/GCLK8/IRDY1, Sch name = JA-2
-NET "spi_miso_o" LOC = P91;
+#NET "spi_miso_o" LOC = P91;
 
 # PlanAhead Generated IO constraints 
 
 NET "CLK1" IOSTANDARD = LVCMOS25;
-NET "spi_sck_i" CLOCK_DEDICATED_ROUTE = FALSE;
+#NET "spi_sck_i" CLOCK_DEDICATED_ROUTE = FALSE;

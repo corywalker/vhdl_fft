@@ -3,9 +3,9 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="C:/Users/John/Code/vhdl_fft/determ_adc_tb_isim_beh.wdb" id="1" type="auto">
+      <db_ref path="C:/Users/John/Code/vhdl_fft/cap_controller_tb_isim_beh.wdb" id="1" type="auto">
          <top_modules>
-            <top_module name="determ_adc_tb" />
+            <top_module name="cap_controller_tb" />
             <top_module name="numeric_std" />
             <top_module name="std_logic_1164" />
             <top_module name="std_logic_arith" />
@@ -13,58 +13,29 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="13" />
-   <wvobject fp_name="/determ_adc_tb/clk1" type="logic" db_ref_id="1">
+   <WVObjectSize size="6" />
+   <wvobject fp_name="/cap_controller_tb/uut/clk1" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">clk1</obj_property>
       <obj_property name="ObjectShortName">clk1</obj_property>
    </wvobject>
-   <wvobject fp_name="/determ_adc_tb/spi_sck_i" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">spi_sck_i</obj_property>
-      <obj_property name="ObjectShortName">spi_sck_i</obj_property>
-   </wvobject>
-   <wvobject fp_name="/determ_adc_tb/spi_miso_o" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">spi_miso_o</obj_property>
-      <obj_property name="ObjectShortName">spi_miso_o</obj_property>
-   </wvobject>
-   <wvobject fp_name="/determ_adc_tb/clk1_period" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">clk1_period</obj_property>
-      <obj_property name="ObjectShortName">clk1_period</obj_property>
-   </wvobject>
-   <wvobject fp_name="/determ_adc_tb/uut/slower_spi_clock" type="logic" db_ref_id="1">
+   <wvobject fp_name="/cap_controller_tb/uut/slower_spi_clock" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">slower_spi_clock</obj_property>
       <obj_property name="ObjectShortName">slower_spi_clock</obj_property>
    </wvobject>
-   <wvobject fp_name="/determ_adc_tb/uut/di_req_o" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">di_req_o</obj_property>
-      <obj_property name="ObjectShortName">di_req_o</obj_property>
+   <wvobject fp_name="/cap_controller_tb/uut/spi_sck" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">spi_sck</obj_property>
+      <obj_property name="ObjectShortName">spi_sck</obj_property>
    </wvobject>
-   <wvobject fp_name="/determ_adc_tb/uut/di_i" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">di_i[15:0]</obj_property>
-      <obj_property name="ObjectShortName">di_i[15:0]</obj_property>
+   <wvobject fp_name="/cap_controller_tb/uut/sm1/do_valid_o" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">do_valid_o</obj_property>
+      <obj_property name="ObjectShortName">do_valid_o</obj_property>
    </wvobject>
-   <wvobject fp_name="/determ_adc_tb/uut/wren_i" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">wren_i</obj_property>
-      <obj_property name="ObjectShortName">wren_i</obj_property>
+   <wvobject fp_name="/cap_controller_tb/uut/sm1/do_o" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">do_o[15:0]</obj_property>
+      <obj_property name="ObjectShortName">do_o[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/determ_adc_tb/uut/s_read_state" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">s_read_state[3:0]</obj_property>
-      <obj_property name="ObjectShortName">s_read_state[3:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/determ_adc_tb/uut/next_s_read_state" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">next_s_read_state[3:0]</obj_property>
-      <obj_property name="ObjectShortName">next_s_read_state[3:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/determ_adc_tb/cnt" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">cnt[3:0]</obj_property>
-      <obj_property name="ObjectShortName">cnt[3:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/determ_adc_tb/uut/cnt1/q" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">q[31:0]</obj_property>
-      <obj_property name="ObjectShortName">q[31:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/determ_adc_tb/uut/spi_ssel_i" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">spi_ssel_i</obj_property>
-      <obj_property name="ObjectShortName">spi_ssel_i</obj_property>
+   <wvobject fp_name="/cap_controller_tb/uut/da1/spi_miso_o" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">spi_miso_o</obj_property>
+      <obj_property name="ObjectShortName">spi_miso_o</obj_property>
    </wvobject>
 </wave_config>
