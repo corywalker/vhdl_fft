@@ -14,6 +14,8 @@ end cap_controller;
 architecture Behavioral of cap_controller is
 
     signal slower_spi_clock: std_logic := '0';
+    signal determ_spi_sck: std_logic;
+    signal determ_spi_miso: std_logic;
     signal spi_sck: std_logic;
     signal spi_miso: std_logic;
 
@@ -23,8 +25,18 @@ begin
         generic map (N => N)
         port map (
             CLK1 => CLK1,
-            spi_sck_i => spi_sck,
-            spi_miso_o => spi_miso
+            spi_sck_i => determ_spi_sck,
+            spi_miso_o => determ_spi_miso
+        );
+        
+    smux1: entity work.spi_mux
+        port map (
+            sck_a_o => determ_spi_sck,
+            sck_i => spi_sck,
+            miso_a_i => determ_spi_miso,
+            miso_b_i => '0',
+            miso_o => spi_miso,
+            sel_i => '0'
         );
         
     sm1: entity work.spi_master
