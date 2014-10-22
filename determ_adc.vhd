@@ -69,7 +69,7 @@ begin
     process(s_read_state, CLK1)
         variable currcount: unsigned (3 downto 0) := "0000";
     begin
-        if(cnt1_Q = 125000000) then
+        if(cnt1_Q = 2000) then -- 40 us reset delay
         --if cnt1_Q = 100 then
             currcount := "0000";
             next_s_read_state <= "0001";

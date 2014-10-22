@@ -1,7 +1,7 @@
 Release 14.7 - par P.20131013 (nt)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-Sun Oct 19 23:23:11 2014
+Wed Oct 22 16:46:11 2014
 
 
 INFO: The IO information is provided in three file formats as part of the Place and Route (PAR) process.  These formats are:
@@ -98,13 +98,13 @@ Pinout by Pin Number:
 |P76       |           |DIFFM    |IO_L02P_1/A14            |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |P77       |           |DIFFS    |IO_L02N_1/A13            |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |P78       |           |IBUF     |IP                       |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
-|P79       |           |         |VCCO_1                   |         |           |1             |          |         |           |         |any******|          |           |                |
+|P79       |           |         |VCCO_1                   |         |           |1             |          |         |           |         |2.50     |          |           |                |
 |P80       |           |         |VCCINT                   |         |           |              |          |         |           |         |1.2      |          |           |                |
 |P81       |           |DIFFM    |IO_L03P_1/A12            |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |P82       |           |DIFFS    |IO_L03N_1/A11            |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |P83       |           |IOB      |IO/VREF_1                |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |P84       |           |IBUF     |IP                       |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
-|P85       |           |DIFFM    |IO_L04P_1/A10/RHCLK0     |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
+|P85       |busy       |IOB      |IO_L04P_1/A10/RHCLK0     |OUTPUT   |LVCMOS25*  |1             |12        |SLOW     |NONE**     |         |         |UNLOCATED |NO         |NONE            |
 |P86       |           |DIFFS    |IO_L04N_1/A9/RHCLK1      |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |P87       |           |DIFFM    |IO_L05P_1/A8/RHCLK2      |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |P88       |           |DIFFS    |IO_L05N_1/A7/RHCLK3/TRDY1|UNUSED   |           |1             |          |         |           |         |         |          |           |                |
@@ -119,7 +119,7 @@ Pinout by Pin Number:
 |P97       |           |DIFFS    |IO_L08N_1/A1             |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |P98       |           |IOB      |IO/A0                    |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |P99       |           |         |GND                      |         |           |              |          |         |           |         |         |          |           |                |
-|P100      |           |         |VCCO_1                   |         |           |1             |          |         |           |         |any******|          |           |                |
+|P100      |           |         |VCCO_1                   |         |           |1             |          |         |           |         |2.50     |          |           |                |
 |P101      |           |IBUF     |IP                       |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |P102      |           |         |VCCAUX                   |         |           |              |          |         |           |         |2.5      |          |           |                |
 |P103      |           |DIFFM    |IO_L09P_1/HDC            |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
@@ -131,8 +131,8 @@ Pinout by Pin Number:
 |P109      |           |         |TDO                      |         |           |              |          |         |           |         |         |          |           |                |
 |P110      |           |         |TCK                      |         |           |              |          |         |           |         |         |          |           |                |
 |P111      |           |IBUF     |IP                       |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
-|P112      |           |DIFFM    |IO_L01P_0                |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
-|P113      |           |DIFFS    |IO_L01N_0                |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
+|P112      |rst        |IBUF     |IO_L01P_0                |INPUT    |LVCMOS25*  |0             |          |         |           |NONE     |         |UNLOCATED |NO         |NONE            |
+|P113      |start      |IBUF     |IO_L01N_0                |INPUT    |LVCMOS25*  |0             |          |         |           |NONE     |         |UNLOCATED |NO         |NONE            |
 |P114      |           |IBUF     |IP                       |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |P115      |           |         |VCCINT                   |         |           |              |          |         |           |         |1.2      |          |           |                |
 |P116      |           |DIFFM    |IO_L02P_0                |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
@@ -140,7 +140,7 @@ Pinout by Pin Number:
 |P118      |           |         |GND                      |         |           |              |          |         |           |         |         |          |           |                |
 |P119      |           |DIFFMI   |IP_L03P_0                |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |P120      |           |DIFFSI   |IP_L03N_0                |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
-|P121      |           |         |VCCO_0                   |         |           |0             |          |         |           |         |any******|          |           |                |
+|P121      |           |         |VCCO_0                   |         |           |0             |          |         |           |         |2.50     |          |           |                |
 |P122      |           |DIFFM    |IO_L04P_0/GCLK4          |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |P123      |           |DIFFS    |IO_L04N_0/GCLK5          |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |P124      |           |IOB      |IO/VREF_0                |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
@@ -157,7 +157,7 @@ Pinout by Pin Number:
 |P135      |           |DIFFS    |IO_L08N_0/VREF_0         |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |P136      |           |IBUF     |IP                       |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |P137      |           |         |VCCAUX                   |         |           |              |          |         |           |         |2.5      |          |           |                |
-|P138      |           |         |VCCO_0                   |         |           |0             |          |         |           |         |any******|          |           |                |
+|P138      |           |         |VCCO_0                   |         |           |0             |          |         |           |         |2.50     |          |           |                |
 |P139      |           |DIFFM    |IO_L09P_0                |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |P140      |           |DIFFS    |IO_L09N_0                |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |P141      |           |IBUF     |IP                       |UNUSED   |           |0             |          |         |           |         |         |          |           |                |

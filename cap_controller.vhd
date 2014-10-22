@@ -7,6 +7,8 @@ entity cap_controller is
     );
 	port(
         CLK1: in std_logic;
+        start: in std_logic;
+        busy: out std_logic := '0';
         rst: in std_logic
     );
 end cap_controller;
@@ -14,10 +16,14 @@ end cap_controller;
 architecture Behavioral of cap_controller is
 
     signal slower_spi_clock: std_logic := '0';
+    signal gated_spi_clock: std_logic := '0';
     signal determ_spi_sck: std_logic;
     signal determ_spi_miso: std_logic;
     signal spi_sck: std_logic;
     signal spi_miso: std_logic;
+    signal sm_data_buf: std_logic_vector (N-1 downto 0);
+    signal sm_valid: std_logic;
+    signal theaddress : natural range 100 downto 0 := 0;
 
 begin
 
@@ -42,21 +48,51 @@ begin
     sm1: entity work.spi_master
         generic map (N => N)
         port map (
-            sclk_i => slower_spi_clock,
-            pclk_i => slower_spi_clock,
+            sclk_i => gated_spi_clock,
+            pclk_i => gated_spi_clock,
             rst_i => rst,
-            di_i => (others => '0'),
             wren_i => '1',
+            do_o => sm_data_buf,
+            do_valid_o => sm_valid,
             spi_sck_o => spi_sck,
             spi_miso_i => spi_miso
         );
         
     process(CLK1)
+        variable address : natural range 100 downto 0 := 0;
+        variable is_busy: std_logic := '0';
+        variable already_stepped : std_logic := '0';
     begin
     
         if rising_edge(CLK1) then
+        
             slower_spi_clock <= not slower_spi_clock;
+            
+            if is_busy = '1' then
+                if sm_valid = '1' and already_stepped = '0' then
+                    already_stepped := '1';
+                    if address = 63 then
+                        is_busy := '0';
+                        address := 0;
+                    else
+                        address := address + 1;
+                    end if;
+                elsif sm_valid = '0' then
+                    already_stepped := '0';
+                end if;
+            else
+                if start = '1' then
+                    is_busy := '1';
+                end if;
+            end if;
+            
+            busy <= is_busy;
+            theaddress <= address;
+    
+            gated_spi_clock <= is_busy and (not slower_spi_clock);
+            
         end if;
+            
     
     end process;
 

@@ -42,6 +42,8 @@ ARCHITECTURE behavior OF cap_controller_tb IS
     COMPONENT cap_controller
     PORT(
          CLK1 : IN  std_logic;
+         start: IN  std_logic;
+         busy: OUT  std_logic;
          rst  : IN  std_logic
         );
     END COMPONENT;
@@ -50,15 +52,19 @@ ARCHITECTURE behavior OF cap_controller_tb IS
    --Inputs
    signal CLK1 : std_logic := '0';
    signal rst  : std_logic := '0';
+   signal start  : std_logic := '0';
+   signal busy  : std_logic := '0';
 
-   -- Clock period definitions
-   constant CLK1_period : time := 10 ns;
+   -- Clock period definitions -- 50 MHz
+   constant CLK1_period : time := 20 ns;
  
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
    uut: cap_controller PORT MAP (
           CLK1 => CLK1,
+          start => start,
+          busy => busy,
           rst => rst
         );
 
@@ -79,10 +85,16 @@ BEGIN
       rst <= '1';
       wait for 100 ns;	
       rst <= '0';
-
-      wait for CLK1_period*10;
-
-      -- insert stimulus here 
+      wait for 300 ns;	
+      
+      loop
+          start <= '1';
+          wait for 100 ns;	
+          start <= '0';
+          wait until busy = '0';
+     
+          wait for 50 us;
+      end loop;
 
       wait;
    end process;

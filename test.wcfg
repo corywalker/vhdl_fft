@@ -13,7 +13,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="17" />
+   <WVObjectSize size="7" />
    <wvobject fp_name="/cap_controller_tb/uut/clk1" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">clk1</obj_property>
       <obj_property name="ObjectShortName">clk1</obj_property>
@@ -34,54 +34,12 @@
       <obj_property name="ElementShortName">do_o[15:0]</obj_property>
       <obj_property name="ObjectShortName">do_o[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/cap_controller_tb/uut/da1/spi_miso_o" type="logic" db_ref_id="1">
-      <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="ElementShortName">spi_miso_o</obj_property>
-      <obj_property name="ObjectShortName">spi_miso_o</obj_property>
-      <obj_property name="label">spi_miso_o</obj_property>
+   <wvobject fp_name="/cap_controller_tb/uut/start" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">start</obj_property>
+      <obj_property name="ObjectShortName">start</obj_property>
    </wvobject>
-   <wvobject fp_name="/cap_controller_tb/uut/sm1/sck_ena_o" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">sck_ena_o</obj_property>
-      <obj_property name="ObjectShortName">sck_ena_o</obj_property>
-   </wvobject>
-   <wvobject fp_name="/cap_controller_tb/uut/sm1/sck_ena_ce_o" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">sck_ena_ce_o</obj_property>
-      <obj_property name="ObjectShortName">sck_ena_ce_o</obj_property>
-   </wvobject>
-   <wvobject fp_name="/cap_controller_tb/uut/sm1/do_transfer_o" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">do_transfer_o</obj_property>
-      <obj_property name="ObjectShortName">do_transfer_o</obj_property>
-   </wvobject>
-   <wvobject fp_name="/cap_controller_tb/uut/sm1/wren_o" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">wren_o</obj_property>
-      <obj_property name="ObjectShortName">wren_o</obj_property>
-   </wvobject>
-   <wvobject fp_name="/cap_controller_tb/uut/sm1/rx_bit_reg_o" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">rx_bit_reg_o</obj_property>
-      <obj_property name="ObjectShortName">rx_bit_reg_o</obj_property>
-   </wvobject>
-   <wvobject fp_name="/cap_controller_tb/uut/sm1/state_dbg_o" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">state_dbg_o[3:0]</obj_property>
-      <obj_property name="ObjectShortName">state_dbg_o[3:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/cap_controller_tb/rst" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">rst</obj_property>
-      <obj_property name="ObjectShortName">rst</obj_property>
-   </wvobject>
-   <wvobject fp_name="/cap_controller_tb/uut/sm1/state_next" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">state_next</obj_property>
-      <obj_property name="ObjectShortName">state_next</obj_property>
-   </wvobject>
-   <wvobject fp_name="/cap_controller_tb/uut/sm1/state_reg" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">state_reg</obj_property>
-      <obj_property name="ObjectShortName">state_reg</obj_property>
-   </wvobject>
-   <wvobject fp_name="/cap_controller_tb/uut/sm1/fsm_ce" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">fsm_ce</obj_property>
-      <obj_property name="ObjectShortName">fsm_ce</obj_property>
-   </wvobject>
-   <wvobject fp_name="/cap_controller_tb/uut/spi_miso" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">spi_miso</obj_property>
-      <obj_property name="ObjectShortName">spi_miso</obj_property>
+   <wvobject fp_name="/cap_controller_tb/uut/busy" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">busy</obj_property>
+      <obj_property name="ObjectShortName">busy</obj_property>
    </wvobject>
 </wave_config>
