@@ -26,6 +26,7 @@ architecture Behavioral of cap_controller is
     signal determ_spi_sck: std_logic;
     signal determ_spi_miso: std_logic;
     signal spi_sck: std_logic;
+    signal thebusy: std_logic;
     signal spi_miso: std_logic;
     signal sm_data_buf: std_logic_vector (N-1 downto 0);
     signal sm_valid: std_logic;
@@ -64,7 +65,8 @@ begin
             spi_miso_i => spi_miso
         );
         
-    wea(0) <= sm_valid;
+    busy <= thebusy;
+    wea(0) <= sm_valid and thebusy;
     addr <= std_logic_vector(to_unsigned(theaddress, addr'length));
     dout <= sm_data_buf;
         
@@ -96,7 +98,7 @@ begin
                 end if;
             end if;
             
-            busy <= is_busy;
+            thebusy <= is_busy;
             theaddress <= address;
     
             gated_spi_clock <= is_busy and (not slower_spi_clock);

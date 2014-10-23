@@ -31,6 +31,7 @@ architecture Behavioral of ft_controller is
     signal cc_busy: std_logic;
     signal br_wea : STD_LOGIC_VECTOR(0 DOWNTO 0);
     signal br_addra : STD_LOGIC_VECTOR(ADDRWIDTH-1 DOWNTO 0);
+    signal theaddr : STD_LOGIC_VECTOR(ADDRWIDTH-1 DOWNTO 0);
     signal br_dina : STD_LOGIC_VECTOR(N-1 DOWNTO 0);
     signal br_douta : STD_LOGIC_VECTOR(N-1 DOWNTO 0);
 
@@ -56,12 +57,12 @@ begin
         port map (
             clka => CLK1,
             wea => br_wea,
-            addra => br_addra,
+            addra => theaddr,
             dina => br_dina,
             douta => br_douta
         );
         
-    Led <= br_dina(15 downto 8);
+    theaddr <= br_addra when cc_busy = '1' else "0000000010";
         
     process(CLK1)
         variable counter : natural range DELAY-1 downto 0 := 0;
@@ -76,6 +77,7 @@ begin
                 cc_start <= '1';
             else
                 counter := counter - 1;
+                Led <= br_douta(15 downto 8);
             end if;
             
         end if;
