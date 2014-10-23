@@ -48,3 +48,4 @@ spi_master_slave/syn/
 *.wdb
 determ_adc_pad.txt
 *.exe
+ipcore_dir/

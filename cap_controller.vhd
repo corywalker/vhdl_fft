@@ -3,7 +3,8 @@ use ieee.std_logic_1164.all;
 
 entity cap_controller is
     generic (
-        N : positive := 16
+        N : positive := 16;
+        SIZE : positive := 64
     );
 	port(
         CLK1: in std_logic;
@@ -23,7 +24,7 @@ architecture Behavioral of cap_controller is
     signal spi_miso: std_logic;
     signal sm_data_buf: std_logic_vector (N-1 downto 0);
     signal sm_valid: std_logic;
-    signal theaddress : natural range 100 downto 0 := 0;
+    signal theaddress : natural range SIZE-1 downto 0 := 0;
 
 begin
 
@@ -59,7 +60,7 @@ begin
         );
         
     process(CLK1)
-        variable address : natural range 100 downto 0 := 0;
+        variable address : natural range SIZE-1 downto 0 := 0;
         variable is_busy: std_logic := '0';
         variable already_stepped : std_logic := '0';
     begin
@@ -71,7 +72,7 @@ begin
             if is_busy = '1' then
                 if sm_valid = '1' and already_stepped = '0' then
                     already_stepped := '1';
-                    if address = 63 then
+                    if address = SIZE-1 then
                         is_busy := '0';
                         address := 0;
                     else

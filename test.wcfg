@@ -3,9 +3,9 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="C:/Users/John/Code/vhdl_fft/cap_controller_tb_isim_beh.wdb" id="1" type="auto">
+      <db_ref path="C:/Users/John/Code/vhdl_fft/ft_controller_tb_isim_beh.wdb" id="1" type="auto">
          <top_modules>
-            <top_module name="cap_controller_tb" />
+            <top_module name="ft_controller_tb" />
             <top_module name="numeric_std" />
             <top_module name="std_logic_1164" />
             <top_module name="std_logic_arith" />
@@ -14,31 +14,31 @@
       </db_ref>
    </db_ref_list>
    <WVObjectSize size="7" />
-   <wvobject fp_name="/cap_controller_tb/uut/clk1" type="logic" db_ref_id="1">
+   <wvobject fp_name="/ft_controller_tb/clk1" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">clk1</obj_property>
       <obj_property name="ObjectShortName">clk1</obj_property>
    </wvobject>
-   <wvobject fp_name="/cap_controller_tb/uut/slower_spi_clock" type="logic" db_ref_id="1">
+   <wvobject fp_name="/ft_controller_tb/uut/cc1/slower_spi_clock" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">slower_spi_clock</obj_property>
       <obj_property name="ObjectShortName">slower_spi_clock</obj_property>
    </wvobject>
-   <wvobject fp_name="/cap_controller_tb/uut/spi_sck" type="logic" db_ref_id="1">
+   <wvobject fp_name="/ft_controller_tb/uut/cc1/spi_sck" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">spi_sck</obj_property>
       <obj_property name="ObjectShortName">spi_sck</obj_property>
    </wvobject>
-   <wvobject fp_name="/cap_controller_tb/uut/sm1/do_valid_o" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">do_valid_o</obj_property>
-      <obj_property name="ObjectShortName">do_valid_o</obj_property>
+   <wvobject fp_name="/ft_controller_tb/uut/cc1/sm_valid" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">sm_valid</obj_property>
+      <obj_property name="ObjectShortName">sm_valid</obj_property>
    </wvobject>
-   <wvobject fp_name="/cap_controller_tb/uut/sm1/do_o" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">do_o[15:0]</obj_property>
-      <obj_property name="ObjectShortName">do_o[15:0]</obj_property>
+   <wvobject fp_name="/ft_controller_tb/uut/cc1/sm_data_buf" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">sm_data_buf[15:0]</obj_property>
+      <obj_property name="ObjectShortName">sm_data_buf[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/cap_controller_tb/uut/start" type="logic" db_ref_id="1">
+   <wvobject fp_name="/ft_controller_tb/uut/cc1/start" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">start</obj_property>
       <obj_property name="ObjectShortName">start</obj_property>
    </wvobject>
-   <wvobject fp_name="/cap_controller_tb/uut/busy" type="logic" db_ref_id="1">
+   <wvobject fp_name="/ft_controller_tb/uut/cc1/busy" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">busy</obj_property>
       <obj_property name="ObjectShortName">busy</obj_property>
    </wvobject>
