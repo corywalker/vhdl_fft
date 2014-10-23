@@ -1,15 +1,20 @@
 library ieee;
 use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
 entity cap_controller is
     generic (
         N : positive := 16;
+        ADDRWIDTH : positive := 10;
         SIZE : positive := 64
     );
 	port(
         CLK1: in std_logic;
         start: in std_logic;
         busy: out std_logic := '0';
+        wea : out std_logic_vector(0 DOWNTO 0);
+        addr : out std_logic_vector(ADDRWIDTH-1 DOWNTO 0);
+        dout : out std_logic_vector(N-1 DOWNTO 0);
         rst: in std_logic
     );
 end cap_controller;
@@ -24,7 +29,7 @@ architecture Behavioral of cap_controller is
     signal spi_miso: std_logic;
     signal sm_data_buf: std_logic_vector (N-1 downto 0);
     signal sm_valid: std_logic;
-    signal theaddress : natural range SIZE-1 downto 0 := 0;
+    signal theaddress : integer range SIZE-1 downto 0 := 0;
 
 begin
 
@@ -59,8 +64,12 @@ begin
             spi_miso_i => spi_miso
         );
         
+    wea(0) <= sm_valid;
+    addr <= std_logic_vector(to_unsigned(theaddress, addr'length));
+    dout <= sm_data_buf;
+        
     process(CLK1)
-        variable address : natural range SIZE-1 downto 0 := 0;
+        variable address : integer range SIZE-1 downto 0 := 0;
         variable is_busy: std_logic := '0';
         variable already_stepped : std_logic := '0';
     begin

@@ -9,11 +9,13 @@
             <top_module name="numeric_std" />
             <top_module name="std_logic_1164" />
             <top_module name="std_logic_arith" />
+            <top_module name="std_logic_textio" />
             <top_module name="std_logic_unsigned" />
+            <top_module name="textio" />
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="7" />
+   <WVObjectSize size="12" />
    <wvobject fp_name="/ft_controller_tb/clk1" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">clk1</obj_property>
       <obj_property name="ObjectShortName">clk1</obj_property>
@@ -41,5 +43,25 @@
    <wvobject fp_name="/ft_controller_tb/uut/cc1/busy" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">busy</obj_property>
       <obj_property name="ObjectShortName">busy</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ft_controller_tb/uut/br_wea" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">br_wea[0:0]</obj_property>
+      <obj_property name="ObjectShortName">br_wea[0:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ft_controller_tb/uut/br_addra" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">br_addra[9:0]</obj_property>
+      <obj_property name="ObjectShortName">br_addra[9:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ft_controller_tb/uut/br_dina" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">br_dina[15:0]</obj_property>
+      <obj_property name="ObjectShortName">br_dina[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ft_controller_tb/uut/br_douta" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">br_douta[15:0]</obj_property>
+      <obj_property name="ObjectShortName">br_douta[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ft_controller_tb/uut/led" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">led[7:0]</obj_property>
+      <obj_property name="ObjectShortName">led[7:0]</obj_property>
    </wvobject>
 </wave_config>
