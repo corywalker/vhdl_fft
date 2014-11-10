@@ -53,7 +53,10 @@ begin
         );
         
     sm1: entity work.spi_master
-        generic map (N => N)
+        generic map (
+            N => N,
+            SPI_2X_CLK_DIV => 40
+        )
         port map (
             sclk_i => gated_spi_clock,
             pclk_i => gated_spi_clock,
@@ -66,6 +69,7 @@ begin
         );
         
     busy <= thebusy;
+    -- Only write if the SPI master out is valid and we are currently capturing
     wea(0) <= sm_valid and thebusy;
     addr <= std_logic_vector(to_unsigned(theaddress, addr'length));
     dout <= sm_data_buf;

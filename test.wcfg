@@ -15,7 +15,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="13" />
+   <WVObjectSize size="15" />
    <wvobject fp_name="/ft_controller_tb/clk1" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">clk1</obj_property>
       <obj_property name="ObjectShortName">clk1</obj_property>
@@ -49,8 +49,8 @@
       <obj_property name="ObjectShortName">br_wea[0:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/ft_controller_tb/uut/br_addra" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">br_addra[9:0]</obj_property>
-      <obj_property name="ObjectShortName">br_addra[9:0]</obj_property>
+      <obj_property name="ElementShortName">br_addra[11:0]</obj_property>
+      <obj_property name="ObjectShortName">br_addra[11:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/ft_controller_tb/uut/br_dina" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">br_dina[15:0]</obj_property>
@@ -65,7 +65,15 @@
       <obj_property name="ObjectShortName">led[7:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/ft_controller_tb/uut/theaddr" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">theaddr[9:0]</obj_property>
-      <obj_property name="ObjectShortName">theaddr[9:0]</obj_property>
+      <obj_property name="ElementShortName">theaddr[11:0]</obj_property>
+      <obj_property name="ObjectShortName">theaddr[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ft_controller_tb/uut/cc1/slower_spi_clock" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">slower_spi_clock</obj_property>
+      <obj_property name="ObjectShortName">slower_spi_clock</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ft_controller_tb/uut/cc1/gated_spi_clock" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">gated_spi_clock</obj_property>
+      <obj_property name="ObjectShortName">gated_spi_clock</obj_property>
    </wvobject>
 </wave_config>

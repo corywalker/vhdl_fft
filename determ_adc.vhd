@@ -82,7 +82,7 @@ begin
                     end if;
                 when "0001" =>
                     next_s_read_state <= "0010";
-                    di_i <= std_logic_vector(currcount) & "000000000000";
+                    di_i <= "10" & std_logic_vector(currcount) & "00000000" & "11";
                 when "0010" =>
                     next_s_read_state <= "0011";
                     currcount := currcount + 1;
