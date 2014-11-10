@@ -9,7 +9,7 @@ entity determ_adc is
         N : positive := 16
     );
 	port(
-        CLK1, spi_sck_i: in std_logic;
+        CLK1, spi_sck_i, conv_i: in std_logic;
         spi_miso_o: out std_logic
     );
 end determ_adc;

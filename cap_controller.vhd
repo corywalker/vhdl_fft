@@ -24,11 +24,14 @@ architecture Behavioral of cap_controller is
     signal slower_spi_clock: std_logic := '0';
     signal gated_spi_clock: std_logic := '0';
     signal determ_spi_sck: std_logic;
+    signal determ_conv: std_logic;
     signal determ_spi_miso: std_logic;
     signal spi_sck: std_logic;
+    signal conv: std_logic;
     signal thebusy: std_logic;
     signal spi_miso: std_logic;
     signal sm_data_buf: std_logic_vector (N-1 downto 0);
+    signal sm_state_dbg: std_logic_vector (3 downto 0);
     signal sm_valid: std_logic;
     signal theaddress : integer range SIZE-1 downto 0 := 0;
 
@@ -39,6 +42,7 @@ begin
         port map (
             CLK1 => CLK1,
             spi_sck_i => determ_spi_sck,
+            conv_i => determ_conv,
             spi_miso_o => determ_spi_miso
         );
         
@@ -46,6 +50,8 @@ begin
         port map (
             sck_a_o => determ_spi_sck,
             sck_i => spi_sck,
+            conv_a_o => determ_conv,
+            conv_i => conv,
             miso_a_i => determ_spi_miso,
             miso_b_i => '0',
             miso_o => spi_miso,
@@ -65,12 +71,14 @@ begin
             do_o => sm_data_buf,
             do_valid_o => sm_valid,
             spi_sck_o => spi_sck,
-            spi_miso_i => spi_miso
+            spi_miso_i => spi_miso,
+            state_dbg_o => sm_state_dbg
         );
         
     busy <= thebusy;
     -- Only write if the SPI master out is valid and we are currently capturing
     wea(0) <= sm_valid and thebusy;
+    conv <= '0' when sm_state_dbg = "0001" else '1';
     addr <= std_logic_vector(to_unsigned(theaddress, addr'length));
     dout <= sm_data_buf;
         

@@ -15,7 +15,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="15" />
+   <WVObjectSize size="16" />
    <wvobject fp_name="/ft_controller_tb/clk1" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">clk1</obj_property>
       <obj_property name="ObjectShortName">clk1</obj_property>
@@ -27,6 +27,10 @@
    <wvobject fp_name="/ft_controller_tb/uut/cc1/spi_sck" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">spi_sck</obj_property>
       <obj_property name="ObjectShortName">spi_sck</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ft_controller_tb/uut/cc1/conv" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">conv</obj_property>
+      <obj_property name="ObjectShortName">conv</obj_property>
    </wvobject>
    <wvobject fp_name="/ft_controller_tb/uut/cc1/sm_valid" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">sm_valid</obj_property>
@@ -68,12 +72,13 @@
       <obj_property name="ElementShortName">theaddr[11:0]</obj_property>
       <obj_property name="ObjectShortName">theaddr[11:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/ft_controller_tb/uut/cc1/slower_spi_clock" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">slower_spi_clock</obj_property>
-      <obj_property name="ObjectShortName">slower_spi_clock</obj_property>
+   <wvobject fp_name="/ft_controller_tb/uut/cc1/sm1/state_dbg_o" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">state_dbg_o[3:0]</obj_property>
+      <obj_property name="ObjectShortName">state_dbg_o[3:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
    </wvobject>
-   <wvobject fp_name="/ft_controller_tb/uut/cc1/gated_spi_clock" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">gated_spi_clock</obj_property>
-      <obj_property name="ObjectShortName">gated_spi_clock</obj_property>
+   <wvobject fp_name="/ft_controller_tb/uut/cc1/sm1/sh_reg_dbg_o" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">sh_reg_dbg_o[15:0]</obj_property>
+      <obj_property name="ObjectShortName">sh_reg_dbg_o[15:0]</obj_property>
    </wvobject>
 </wave_config>
