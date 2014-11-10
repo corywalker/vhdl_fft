@@ -77,8 +77,8 @@
       <obj_property name="ObjectShortName">state_dbg_o[3:0]</obj_property>
       <obj_property name="Radix">HEXRADIX</obj_property>
    </wvobject>
-   <wvobject fp_name="/ft_controller_tb/uut/cc1/sm1/sh_reg_dbg_o" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">sh_reg_dbg_o[15:0]</obj_property>
-      <obj_property name="ObjectShortName">sh_reg_dbg_o[15:0]</obj_property>
+   <wvobject fp_name="/ft_controller_tb/uut/cc1/da1/di_i" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">di_i[15:0]</obj_property>
+      <obj_property name="ObjectShortName">di_i[15:0]</obj_property>
    </wvobject>
 </wave_config>

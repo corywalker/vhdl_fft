@@ -82,7 +82,7 @@ begin
                 cc_start <= '1';
             else
                 counter := counter - 1;
-                Led <= br_douta(15 downto 8);
+                Led <= br_douta(14 downto 7);
             end if;
             
         end if;
