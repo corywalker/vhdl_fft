@@ -27,3 +27,9 @@ NET "CLK1" LOC = P54;
  NET "Led<5>"    LOC = "P4";  # Bank = 3, Pin name = IO_L2P_3,            Sch name = LD5
  NET "Led<6>"    LOC = "P3";  # Bank = 3, Pin name = IO_L1N_3,            Sch name = LD6
  NET "Led<7>"    LOC = "P2";  # Bank = 3, Pin name = IO_L1P_3,            Sch name = LD7
+ 
+ 
+ # 6 pin connectors                                                                                                                        
+ NET "pmod_conv" LOC = "P81"; # Bank = 1, Pin name = IO_L3P_1/A12,            Sch name = JA-1
+ NET "pmod_sck" LOC = "P91"; # Bank = 1, Pin name = IO_L6P_1/A6/GCLK8/IRDY1, Sch name = JA-2
+ NET "pmod_miso" LOC = "P82"; # Bank = 1, Pin name = IO_L3N_1/A11,            Sch name = JA-3

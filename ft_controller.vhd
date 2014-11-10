@@ -15,6 +15,9 @@ entity ft_controller is
     );
 	port(
         CLK1: in std_logic;
+        pmod_conv: out std_logic;
+        pmod_sck: out std_logic;
+        pmod_miso: in std_logic;
         Led : out std_logic_vector(7 downto 0) := "10001000";
         rst : in std_logic
     );
@@ -55,6 +58,9 @@ begin
             wea => br_wea,
             addr => br_addra,
             dout => br_dina,
+            pmod_conv => pmod_conv,
+            pmod_sck => pmod_sck,
+            pmod_miso => pmod_miso,
             rst => rst
         );
         

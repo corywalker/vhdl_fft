@@ -22,8 +22,8 @@ begin
 
     sck_a_o <= sck_i when sel_i = '0' else 'Z';
     sck_b_o <= sck_i when sel_i = '1' else 'Z';
-    conv_a_o <= conv_i when conv_i = '0' else 'Z';
-    conv_b_o <= conv_i when conv_i = '1' else 'Z';
+    conv_a_o <= conv_i when sel_i = '0' else 'Z';
+    conv_b_o <= conv_i when sel_i = '1' else 'Z';
     miso_o <= miso_a_i when sel_i = '0' else miso_b_i;
 
 end Behavioral;

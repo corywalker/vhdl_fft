@@ -15,6 +15,9 @@ entity cap_controller is
         wea : out std_logic_vector(0 DOWNTO 0);
         addr : out std_logic_vector(ADDRWIDTH-1 DOWNTO 0);
         dout : out std_logic_vector(N-1 DOWNTO 0);
+        pmod_conv: out std_logic;
+        pmod_sck: out std_logic;
+        pmod_miso: in std_logic;
         rst: in std_logic
     );
 end cap_controller;
@@ -49,13 +52,16 @@ begin
     smux1: entity work.spi_mux
         port map (
             sck_a_o => determ_spi_sck,
+            sck_b_o => pmod_sck,
             sck_i => spi_sck,
             conv_a_o => determ_conv,
+            conv_b_o => pmod_conv,
             conv_i => conv,
             miso_a_i => determ_spi_miso,
-            miso_b_i => '0',
+            miso_b_i => pmod_miso,
             miso_o => spi_miso,
-            sel_i => '0'
+            -- '0' for determ_adc, '1' for external.
+            sel_i => '1'
         );
         
     sm1: entity work.spi_master
