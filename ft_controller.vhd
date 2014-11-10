@@ -4,12 +4,20 @@ use ieee.std_logic_1164.all;
 entity ft_controller is
     generic (
         N : positive := 16;
+        -- Really small for now for easier simulation
+        -- Will increase later
         SIZE : positive := 64;
-        ADDRWIDTH : positive := 10;
+        -- We have 4096 words in the RAM
+        ADDRWIDTH : positive := 12;
+        -- Time to wait in between capture sessions
+        -- This will be irrelevant once we have output SPI
         DELAY : positive := 10000
     );
 	port(
         CLK1: in std_logic;
+        pmod_conv: out std_logic;
+        pmod_sck: out std_logic;
+        pmod_miso: in std_logic;
         Led : out std_logic_vector(7 downto 0) := "10001000";
         rst : in std_logic
     );
@@ -50,6 +58,9 @@ begin
             wea => br_wea,
             addr => br_addra,
             dout => br_dina,
+            pmod_conv => pmod_conv,
+            pmod_sck => pmod_sck,
+            pmod_miso => pmod_miso,
             rst => rst
         );
         
@@ -62,7 +73,7 @@ begin
             douta => br_douta
         );
         
-    theaddr <= br_addra when cc_busy = '1' else "0000000010";
+    theaddr <= br_addra when cc_busy = '1' else "000000000010";
         
     process(CLK1)
         variable counter : natural range DELAY-1 downto 0 := 0;
@@ -77,7 +88,7 @@ begin
                 cc_start <= '1';
             else
                 counter := counter - 1;
-                Led <= br_douta(15 downto 8);
+                Led <= br_douta(14 downto 7);
             end if;
             
         end if;

@@ -9,7 +9,7 @@ entity determ_adc is
         N : positive := 16
     );
 	port(
-        CLK1, spi_sck_i: in std_logic;
+        CLK1, spi_sck_i, conv_i: in std_logic;
         spi_miso_o: out std_logic
     );
 end determ_adc;
@@ -69,7 +69,7 @@ begin
     process(s_read_state, CLK1)
         variable currcount: unsigned (3 downto 0) := "0000";
     begin
-        if(cnt1_Q = 2000) then -- 40 us reset delay
+        if(cnt1_Q = 10000) then -- 40 us reset delay
         --if cnt1_Q = 100 then
             currcount := "0000";
             next_s_read_state <= "0001";
@@ -82,7 +82,7 @@ begin
                     end if;
                 when "0001" =>
                     next_s_read_state <= "0010";
-                    di_i <= std_logic_vector(currcount) & "000000000000";
+                    di_i <= "0" & std_logic_vector(currcount) & "00000000" & "111";
                 when "0010" =>
                     next_s_read_state <= "0011";
                     currcount := currcount + 1;

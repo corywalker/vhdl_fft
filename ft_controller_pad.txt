@@ -1,7 +1,7 @@
 Release 14.7 - par P.20131013 (nt)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-Thu Oct 23 00:21:00 2014
+Sun Nov 09 21:24:23 2014
 
 
 INFO: The IO information is provided in three file formats as part of the Place and Route (PAR) process.  These formats are:
@@ -25,13 +25,13 @@ Pinout by Pin Number:
 |P3        |Led<6>     |IOB      |IO_L01N_3                |OUTPUT   |LVCMOS25*  |3             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
 |P4        |Led<5>     |IOB      |IO_L02P_3                |OUTPUT   |LVCMOS25*  |3             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
 |P5        |Led<4>     |IOB      |IO_L02N_3/VREF_3         |OUTPUT   |LVCMOS25*  |3             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
-|P6        |rst        |IBUF     |IP                       |INPUT    |LVCMOS25*  |3             |          |         |           |NONE     |         |UNLOCATED |NO         |NONE            |
+|P6        |           |IBUF     |IP                       |UNUSED   |           |3             |          |         |           |         |         |          |           |                |
 |P7        |Led<3>     |IOB      |IO_L03P_3                |OUTPUT   |LVCMOS25*  |3             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
 |P8        |Led<2>     |IOB      |IO_L03N_3                |OUTPUT   |LVCMOS25*  |3             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
 |P9        |           |         |VCCINT                   |         |           |              |          |         |           |         |1.2      |          |           |                |
 |P10       |           |IOB      |IO                       |UNUSED   |           |3             |          |         |           |         |         |          |           |                |
 |P11       |           |         |GND                      |         |           |              |          |         |           |         |         |          |           |                |
-|P12       |           |IBUF     |IP/VREF_3                |UNUSED   |           |3             |          |         |           |         |         |          |           |                |
+|P12       |rst        |IBUF     |IP/VREF_3                |INPUT    |LVCMOS25*  |3             |          |         |           |NONE     |         |UNLOCATED |NO         |NONE            |
 |P13       |           |         |VCCO_3                   |         |           |3             |          |         |           |         |2.50     |          |           |                |
 |P14       |Led<1>     |IOB      |IO_L04P_3/LHCLK0         |OUTPUT   |LVCMOS25*  |3             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
 |P15       |Led<0>     |IOB      |IO_L04N_3/LHCLK1         |OUTPUT   |LVCMOS25*  |3             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
@@ -98,10 +98,10 @@ Pinout by Pin Number:
 |P76       |           |DIFFM    |IO_L02P_1/A14            |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |P77       |           |DIFFS    |IO_L02N_1/A13            |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |P78       |           |IBUF     |IP                       |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
-|P79       |           |         |VCCO_1                   |         |           |1             |          |         |           |         |any******|          |           |                |
+|P79       |           |         |VCCO_1                   |         |           |1             |          |         |           |         |2.50     |          |           |                |
 |P80       |           |         |VCCINT                   |         |           |              |          |         |           |         |1.2      |          |           |                |
-|P81       |           |DIFFM    |IO_L03P_1/A12            |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
-|P82       |           |DIFFS    |IO_L03N_1/A11            |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
+|P81       |pmod_conv  |IOB      |IO_L03P_1/A12            |OUTPUT   |LVCMOS25*  |1             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
+|P82       |pmod_miso  |IBUF     |IO_L03N_1/A11            |INPUT    |LVCMOS25*  |1             |          |         |           |NONE     |         |LOCATED   |NO         |NONE            |
 |P83       |           |IOB      |IO/VREF_1                |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |P84       |           |IBUF     |IP                       |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |P85       |           |DIFFM    |IO_L04P_1/A10/RHCLK0     |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
@@ -110,7 +110,7 @@ Pinout by Pin Number:
 |P88       |           |DIFFS    |IO_L05N_1/A7/RHCLK3/TRDY1|UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |P89       |           |IBUF     |IP                       |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |P90       |           |         |GND                      |         |           |              |          |         |           |         |         |          |           |                |
-|P91       |           |DIFFM    |IO_L06P_1/A6/RHCLK4/IRDY1|UNUSED   |           |1             |          |         |           |         |         |          |           |                |
+|P91       |pmod_sck   |IOB      |IO_L06P_1/A6/RHCLK4/IRDY1|OUTPUT   |LVCMOS25*  |1             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
 |P92       |           |DIFFS    |IO_L06N_1/A5/RHCLK5      |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |P93       |           |DIFFM    |IO_L07P_1/A4/RHCLK6      |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |P94       |           |DIFFS    |IO_L07N_1/A3/RHCLK7      |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
@@ -119,7 +119,7 @@ Pinout by Pin Number:
 |P97       |           |DIFFS    |IO_L08N_1/A1             |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |P98       |           |IOB      |IO/A0                    |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |P99       |           |         |GND                      |         |           |              |          |         |           |         |         |          |           |                |
-|P100      |           |         |VCCO_1                   |         |           |1             |          |         |           |         |any******|          |           |                |
+|P100      |           |         |VCCO_1                   |         |           |1             |          |         |           |         |2.50     |          |           |                |
 |P101      |           |IBUF     |IP                       |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |P102      |           |         |VCCAUX                   |         |           |              |          |         |           |         |2.5      |          |           |                |
 |P103      |           |DIFFM    |IO_L09P_1/HDC            |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
