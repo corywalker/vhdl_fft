@@ -6,7 +6,8 @@ use ieee.numeric_std.all;
 
 entity determ_adc is
     generic (
-        N : positive := 16
+        N : positive := 16;
+        DA_RESET_DELAY: positive
     );
 	port(
         CLK1, spi_sck_i, conv_i: in std_logic;
@@ -69,8 +70,7 @@ begin
     process(s_read_state, CLK1)
         variable currcount: unsigned (3 downto 0) := "0000";
     begin
-        if(cnt1_Q = 10000) then -- 40 us reset delay
-        --if cnt1_Q = 100 then
+        if(cnt1_Q = DA_RESET_DELAY) then
             currcount := "0000";
             next_s_read_state <= "0001";
             spi_ssel_i <= '1';
@@ -109,20 +109,6 @@ begin
                     next_s_read_state <= "0000";
             end case;
         end if;
---        if s_read_state = "0000" and falling_edge(CLK1) and di_req_o = '1' then
---            next_s_read_state <= "0001";
---        elsif s_read_state = "0001" and rising_edge(CLK1) then
---            next_s_read_state <= "0010";
---            --di_i <= not di_i;
---        elsif s_read_state = "0010" and rising_edge(CLK1) then
---            next_s_read_state <= "0011";
---        elsif s_read_state = "0011" and rising_edge(CLK1) then
---            next_s_read_state <= "0100";
---            --wren_i <= '1';
---        elsif s_read_state = "0100" and rising_edge(CLK1) then
---            next_s_read_state <= "0000";
---            --wren_i <= '0';
---        end if;
 
     end process;
     

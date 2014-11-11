@@ -8,7 +8,8 @@ entity cap_controller is
         ADDRWIDTH : positive := 10;
         SIZE : positive := 64;
         INT_EXT_SEL: std_logic;
-        SPI_2X_CLK_DIV: positive
+        SPI_2X_CLK_DIV: positive;
+        DA_RESET_DELAY: positive
     );
 	port(
         CLK1: in std_logic;
@@ -43,7 +44,10 @@ architecture Behavioral of cap_controller is
 begin
 
     da1: entity work.determ_adc
-        generic map (N => N)
+        generic map (
+            N => N,
+            DA_RESET_DELAY => DA_RESET_DELAY
+        )
         port map (
             CLK1 => CLK1,
             spi_sck_i => determ_spi_sck,
