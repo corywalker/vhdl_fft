@@ -4,14 +4,19 @@ use ieee.std_logic_1164.all;
 entity ft_controller is
     generic (
         N : positive := 16;
-        -- Really small for now for easier simulation
-        -- Will increase later
-        SIZE : positive := 64;
         -- We have 4096 words in the RAM
         ADDRWIDTH : positive := 12;
+        
+        -- DELAY:
         -- Time to wait in between capture sessions
         -- This will be irrelevant once we have output SPI
-        DELAY : positive := 10000
+        -- INT_EXT_SEL:
+        -- '0' for determ_adc, '1' for external.
+        
+        SIZE : positive := 64;
+        DELAY : positive := 10000;
+        INT_EXT_SEL: std_logic := '0';
+        SPI_2X_CLK_DIV: positive := 40
     );
 	port(
         CLK1: in std_logic;
@@ -49,7 +54,9 @@ begin
         generic map (
             N => N,
             SIZE => SIZE,
-            ADDRWIDTH => ADDRWIDTH
+            ADDRWIDTH => ADDRWIDTH,
+            INT_EXT_SEL => INT_EXT_SEL,
+            SPI_2X_CLK_DIV => SPI_2X_CLK_DIV
         )
         port map (
             CLK1 => CLK1,

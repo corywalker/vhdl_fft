@@ -6,7 +6,9 @@ entity cap_controller is
     generic (
         N : positive := 16;
         ADDRWIDTH : positive := 10;
-        SIZE : positive := 64
+        SIZE : positive := 64;
+        INT_EXT_SEL: std_logic;
+        SPI_2X_CLK_DIV: positive
     );
 	port(
         CLK1: in std_logic;
@@ -61,13 +63,13 @@ begin
             miso_b_i => pmod_miso,
             miso_o => spi_miso,
             -- '0' for determ_adc, '1' for external.
-            sel_i => '1'
+            sel_i => INT_EXT_SEL
         );
         
     sm1: entity work.spi_master
         generic map (
             N => N,
-            SPI_2X_CLK_DIV => 40
+            SPI_2X_CLK_DIV => SPI_2X_CLK_DIV
         )
         port map (
             sclk_i => gated_spi_clock,

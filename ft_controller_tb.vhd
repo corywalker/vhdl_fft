@@ -40,9 +40,16 @@ ARCHITECTURE behavior OF ft_controller_tb IS
     -- Component Declaration for the Unit Under Test (UUT)
  
     COMPONENT ft_controller
+    generic (
+        SIZE : positive;
+        DELAY : positive;
+        INT_EXT_SEL: std_logic;
+        SPI_2X_CLK_DIV: positive
+    );
     PORT(
          CLK1 : IN  std_logic;
-         rst : IN  std_logic
+         rst : IN  std_logic;
+         pmod_miso : IN  std_logic
         );
     END COMPONENT;
     
@@ -57,9 +64,17 @@ ARCHITECTURE behavior OF ft_controller_tb IS
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: ft_controller PORT MAP (
+   uut: ft_controller
+        generic map (
+            SIZE => 4,
+            DELAY => 300,
+            INT_EXT_SEL => '0',
+            SPI_2X_CLK_DIV => 2
+        )
+        PORT MAP (
           CLK1 => CLK1,
-          rst => rst
+          rst => rst,
+          pmod_miso => '0'
         );
 
    -- Clock process definitions
