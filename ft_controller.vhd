@@ -48,9 +48,11 @@ architecture Behavioral of ft_controller is
     END COMPONENT;
 
     signal cc_start: std_logic := '1';
+    signal addr_rst: std_logic := '1';
     signal cc_busy: std_logic;
     signal br_wea : STD_LOGIC_VECTOR(0 DOWNTO 0);
     signal br_addra : STD_LOGIC_VECTOR(ADDRWIDTH-1 DOWNTO 0);
+    signal oi_addr_o : STD_LOGIC_VECTOR(ADDRWIDTH-1 DOWNTO 0);
     signal theaddr : STD_LOGIC_VECTOR(ADDRWIDTH-1 DOWNTO 0);
     signal br_dina : STD_LOGIC_VECTOR(N-1 DOWNTO 0);
     signal br_douta : STD_LOGIC_VECTOR(N-1 DOWNTO 0);
@@ -90,17 +92,21 @@ begin
         
     oi1: entity work.outbuf_interp
         generic map (
-            N => N
+            N => N,
+            ADDRWIDTH => ADDRWIDTH
         )
         port map (
             CLK1 => CLK1,
             spi_sck_i => sck_i,
-            addr_rst => '0',
-            spi_miso_o => miso_o
+            addr_rst => addr_rst,
+            spi_miso_o => miso_o,
+            din => br_douta,
+            addr => oi_addr_o
         );
         
-    theaddr <= br_addra when cc_busy = '1' else "000000000010";
+    theaddr <= br_addra when cc_busy = '1' else oi_addr_o;
     busy_o <= cc_busy;
+    addr_rst <= cc_busy;
         
     process(CLK1)
     begin

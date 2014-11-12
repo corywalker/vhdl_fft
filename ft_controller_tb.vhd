@@ -63,6 +63,7 @@ ARCHITECTURE behavior OF ft_controller_tb IS
    signal rst : std_logic := '0';
    signal start : std_logic := '0';
    signal busy : std_logic;
+   signal sck : std_logic := '0';
 
    -- Clock period definitions
    constant CLK1_period : time := 10 ns;
@@ -83,7 +84,7 @@ BEGIN
           rst => rst,
           start_i => start,
           busy_o => busy,
-          sck_i => '0',
+          sck_i => sck,
           adc_miso => '0'
         );
 
@@ -112,6 +113,15 @@ BEGIN
       wait for CLK1_period*10;
       
       wait until busy = '0';
+      wait for 1us;
+      
+      for I in 0 to 4*16 loop
+          sck <= '1';
+          wait for 30 ns;	
+          sck <= '0';
+          wait for 30 ns;	
+      end loop;
+      
       wait for 10us;
       
       end loop;

@@ -15,7 +15,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="9" />
+   <WVObjectSize size="13" />
    <wvobject fp_name="/ft_controller_tb/clk1" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">clk1</obj_property>
       <obj_property name="ObjectShortName">clk1</obj_property>
@@ -51,5 +51,21 @@
    <wvobject fp_name="/ft_controller_tb/uut/cc1/da1/ss1/di_i" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">di_i[15:0]</obj_property>
       <obj_property name="ObjectShortName">di_i[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ft_controller_tb/sck" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">sck</obj_property>
+      <obj_property name="ObjectShortName">sck</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ft_controller_tb/uut/miso_o" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">miso_o</obj_property>
+      <obj_property name="ObjectShortName">miso_o</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ft_controller_tb/uut/oi1/di_i" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">di_i[15:0]</obj_property>
+      <obj_property name="ObjectShortName">di_i[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ft_controller_tb/uut/theaddr" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">theaddr[11:0]</obj_property>
+      <obj_property name="ObjectShortName">theaddr[11:0]</obj_property>
    </wvobject>
 </wave_config>

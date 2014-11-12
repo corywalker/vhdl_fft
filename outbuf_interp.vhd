@@ -6,11 +6,14 @@ use ieee.numeric_std.all;
 
 entity outbuf_interp is
     generic (
-        N : positive := 16
+        N : positive := 16;
+        ADDRWIDTH : positive := 12
     );
 	port(
         CLK1, spi_sck_i, addr_rst: in std_logic;
-        spi_miso_o: out std_logic
+        spi_miso_o: out std_logic;
+        addr : OUT STD_LOGIC_VECTOR(ADDRWIDTH-1 DOWNTO 0) := "000000000000";
+        din : IN STD_LOGIC_VECTOR(N-1 DOWNTO 0)
     );
 end outbuf_interp;
 
@@ -71,6 +74,7 @@ begin
     begin
         if(addr_rst = '1') then
             currcount := "0000";
+            addr <= "00000000" & std_logic_vector(currcount);
             next_s_read_state <= "0001";
             spi_ssel_i <= '1';
         elsif rising_edge(CLK1) then
@@ -81,10 +85,11 @@ begin
                     end if;
                 when "0001" =>
                     next_s_read_state <= "0010";
-                    di_i <= "0" & std_logic_vector(currcount) & "00000000" & "111";
+                    di_i <= din;
                 when "0010" =>
                     next_s_read_state <= "0011";
                     currcount := currcount + 1;
+                    addr <= "00000000" & std_logic_vector(currcount);
                     -- We toggle ssel like this because it resets the position
                     -- if we change our mind about di_i.
                     spi_ssel_i <= '0';
