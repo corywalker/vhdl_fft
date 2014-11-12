@@ -68,7 +68,7 @@ begin
         )
         port map (
             CLK1 => CLK1,
-            start => cc_start,
+            start => start_i,
             busy => cc_busy,
             wea => br_wea,
             addr => br_addra,
@@ -100,23 +100,13 @@ begin
         );
         
     theaddr <= br_addra when cc_busy = '1' else "000000000010";
+    busy_o <= cc_busy;
         
     process(CLK1)
-        variable counter : natural range DELAY-1 downto 0 := 0;
     begin
     
         if rising_edge(CLK1) then
-            
-            if cc_busy = '1' then
-                cc_start <= '0';
-                counter := DELAY-1;
-            elsif counter = 0 then
-                cc_start <= '1';
-            else
-                counter := counter - 1;
-                Led <= br_douta(14 downto 7);
-            end if;
-            
+            Led <= br_douta(14 downto 7);
         end if;
     
     end process;

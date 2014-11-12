@@ -52,6 +52,7 @@ ARCHITECTURE behavior OF ft_controller_tb IS
          rst : IN  std_logic;
          adc_miso : IN  std_logic;
          start_i : IN  std_logic;
+         busy_o : OUT std_logic;
          sck_i : IN  std_logic
         );
     END COMPONENT;
@@ -61,6 +62,7 @@ ARCHITECTURE behavior OF ft_controller_tb IS
    signal CLK1 : std_logic := '0';
    signal rst : std_logic := '0';
    signal start : std_logic := '0';
+   signal busy : std_logic;
 
    -- Clock period definitions
    constant CLK1_period : time := 10 ns;
@@ -80,6 +82,7 @@ BEGIN
           CLK1 => CLK1,
           rst => rst,
           start_i => start,
+          busy_o => busy,
           sck_i => '0',
           adc_miso => '0'
         );
@@ -100,13 +103,18 @@ BEGIN
       -- hold reset state for 100 ns.
       wait for 100 ns;	
       
+      loop
+      
       start <= '1';
-      wait for 10 ns;	
+      wait for 30 ns;	
       start <= '0';
 
       wait for CLK1_period*10;
-
-      -- insert stimulus here 
+      
+      wait until busy = '0';
+      wait for 10us;
+      
+      end loop;
 
       wait;
    end process;

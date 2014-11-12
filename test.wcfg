@@ -15,30 +15,14 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="16" />
+   <WVObjectSize size="9" />
    <wvobject fp_name="/ft_controller_tb/clk1" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">clk1</obj_property>
       <obj_property name="ObjectShortName">clk1</obj_property>
    </wvobject>
-   <wvobject fp_name="/ft_controller_tb/uut/cc1/slower_spi_clock" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">slower_spi_clock</obj_property>
-      <obj_property name="ObjectShortName">slower_spi_clock</obj_property>
-   </wvobject>
    <wvobject fp_name="/ft_controller_tb/uut/cc1/spi_sck" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">spi_sck</obj_property>
       <obj_property name="ObjectShortName">spi_sck</obj_property>
-   </wvobject>
-   <wvobject fp_name="/ft_controller_tb/uut/cc1/conv" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">conv</obj_property>
-      <obj_property name="ObjectShortName">conv</obj_property>
-   </wvobject>
-   <wvobject fp_name="/ft_controller_tb/uut/cc1/sm_valid" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">sm_valid</obj_property>
-      <obj_property name="ObjectShortName">sm_valid</obj_property>
-   </wvobject>
-   <wvobject fp_name="/ft_controller_tb/uut/cc1/sm_data_buf" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">sm_data_buf[15:0]</obj_property>
-      <obj_property name="ObjectShortName">sm_data_buf[15:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/ft_controller_tb/uut/cc1/start" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">start</obj_property>
@@ -52,32 +36,19 @@
       <obj_property name="ElementShortName">br_wea[0:0]</obj_property>
       <obj_property name="ObjectShortName">br_wea[0:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/ft_controller_tb/uut/br_addra" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">br_addra[11:0]</obj_property>
-      <obj_property name="ObjectShortName">br_addra[11:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/ft_controller_tb/uut/br_dina" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">br_dina[15:0]</obj_property>
-      <obj_property name="ObjectShortName">br_dina[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/ft_controller_tb/uut/br_douta" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">br_douta[15:0]</obj_property>
-      <obj_property name="ObjectShortName">br_douta[15:0]</obj_property>
-   </wvobject>
    <wvobject fp_name="/ft_controller_tb/uut/led" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">led[7:0]</obj_property>
       <obj_property name="ObjectShortName">led[7:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/ft_controller_tb/uut/theaddr" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">theaddr[11:0]</obj_property>
-      <obj_property name="ObjectShortName">theaddr[11:0]</obj_property>
+   <wvobject fp_name="/ft_controller_tb/start" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">start</obj_property>
+      <obj_property name="ObjectShortName">start</obj_property>
    </wvobject>
-   <wvobject fp_name="/ft_controller_tb/uut/cc1/sm1/state_dbg_o" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">state_dbg_o[3:0]</obj_property>
-      <obj_property name="ObjectShortName">state_dbg_o[3:0]</obj_property>
-      <obj_property name="Radix">HEXRADIX</obj_property>
+   <wvobject fp_name="/ft_controller_tb/busy" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">busy</obj_property>
+      <obj_property name="ObjectShortName">busy</obj_property>
    </wvobject>
-   <wvobject fp_name="/ft_controller_tb/uut/cc1/da1/di_i" type="array" db_ref_id="1">
+   <wvobject fp_name="/ft_controller_tb/uut/cc1/da1/ss1/di_i" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">di_i[15:0]</obj_property>
       <obj_property name="ObjectShortName">di_i[15:0]</obj_property>
    </wvobject>
