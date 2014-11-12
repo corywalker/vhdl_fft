@@ -33,3 +33,8 @@ NET "CLK1" LOC = P54;
  NET "adc_conv" LOC = "P81"; # Bank = 1, Pin name = IO_L3P_1/A12,            Sch name = JA-1
  NET "adc_sck" LOC = "P91"; # Bank = 1, Pin name = IO_L6P_1/A6/GCLK8/IRDY1, Sch name = JA-2
  NET "adc_miso" LOC = "P82"; # Bank = 1, Pin name = IO_L3N_1/A11,            Sch name = JA-3
+ 
+ NET "start_i" LOC = "P87"; # Bank = 1, Pin name = IO_L5P_1/A8/GCLK6,       Sch name = JB-1
+ NET "busy_o" LOC = "P93"; # Bank = 1, Pin name = IO_L7P_1/A4/GCLK10,      Sch name = JB-2
+ NET "sck_i" LOC = "P88"; # Bank = 1, Pin name = IO_L5N_1/A7/GCLK7/TRDY1, Sch name = JB-3
+ NET "miso_o" LOC = "P94"; # Bank = 1, Pin name = IO_L7N_1/A3/GCLK11,      Sch name = JB-4

@@ -92,7 +92,8 @@ begin
     wea(0) <= sm_valid and thebusy;
     conv <= '0' when sm_state_dbg = "0001" else '1';
     addr <= std_logic_vector(to_unsigned(theaddress, addr'length));
-    dout <= sm_data_buf;
+    -- ODD??!!
+    dout <= sm_data_buf(15 downto 8) & "00000000";
         
     process(CLK1)
         variable address : integer range SIZE-1 downto 0 := 0;

@@ -1,0 +1,11 @@
+
+# PlanAhead Launch Script for Post-Synthesis floorplanning, created by Project Navigator
+
+create_project -name fft -dir "C:/Users/John/Code/vhdl_fft/planAhead_run_2" -part xc3s100etq144-5
+set_property design_mode GateLvl [get_property srcset [current_run -impl]]
+set_property edif_top_file "C:/Users/John/Code/vhdl_fft/ft_controller.ngc" [ get_property srcset [ current_run ] ]
+add_files -norecurse { {C:/Users/John/Code/vhdl_fft} {ipcore_dir} }
+add_files [list {ipcore_dir/bram.ncf}] -fileset [get_property constrset [current_run]]
+set_property target_constrs_file "pins.ucf" [current_fileset -constrset]
+add_files [list {pins.ucf}] -fileset [get_property constrset [current_run]]
+link_design

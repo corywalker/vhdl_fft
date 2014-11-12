@@ -15,7 +15,7 @@ entity ft_controller is
         
         SIZE : positive := 64;
         DELAY : positive := 10000;
-        INT_EXT_SEL: std_logic := '0';
+        INT_EXT_SEL: std_logic := '1';
         SPI_2X_CLK_DIV: positive := 40;
         DA_RESET_DELAY: positive := 10000
     );
