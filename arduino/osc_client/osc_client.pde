@@ -9,7 +9,9 @@ void setup() {
   println(Serial.list());
   // Open the port you are using at the rate you want:
   s = new Serial(this, "/dev/tty.usbmodem14211", 115200);
-  frameRate(15);
+  
+  size(550, 256);
+  frameRate(5);
 }
 
 
@@ -22,10 +24,15 @@ void delay(int delay)
 void draw() {
   println("starting read");
   s.write(83);
-  for (int i = 0; i < 4; i++) {
+  int x = 0;
+  background(220);
+  for (int i = 0; i < 512; i++) {
     int im = s.read();
     int real = s.read();
     println(real);
+    stroke(90, 76, 99);
+    line(x, height, x, height - real);
+    x++;
   }
   s.clear();
   /*

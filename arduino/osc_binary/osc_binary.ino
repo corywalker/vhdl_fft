@@ -33,7 +33,7 @@ void loop() {
       
       delayMicroseconds(5);
       
-      for (int j = 0; j < 4; j++) {
+      for (int j = 0; j < 512; j++) {
         // Read the 16 bit value
         unsigned int val = 0;
         for (int i = 0; i < 16; i++) {
