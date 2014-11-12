@@ -35,6 +35,7 @@ void loop() {
       val += digitalRead(dataPin) << (15-i);
       digitalWrite(clockPin, LOW);
     }
+    // ASCII communication
     Serial.println(val);
   }
   
