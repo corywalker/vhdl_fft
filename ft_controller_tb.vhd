@@ -117,9 +117,9 @@ BEGIN
       
       for I in 0 to 4*16 loop
           sck <= '1';
-          wait for 30 ns;	
+          wait for 30 ns;
           sck <= '0';
-          wait for 30 ns;	
+          wait for 30 ns;
       end loop;
       
       wait for 10us;

@@ -70,11 +70,11 @@ begin
     end process;
     
     process(s_read_state, CLK1)
-        variable currcount: unsigned (3 downto 0) := "0000";
+        variable currcount: unsigned (ADDRWIDTH-1 downto 0) := (OTHERS => '0');
     begin
         if(addr_rst = '1') then
-            currcount := "0000";
-            addr <= "00000000" & std_logic_vector(currcount);
+            currcount := (OTHERS => '0');
+            addr <= std_logic_vector(currcount);
             next_s_read_state <= "0001";
             spi_ssel_i <= '1';
         elsif rising_edge(CLK1) then
@@ -85,11 +85,11 @@ begin
                     end if;
                 when "0001" =>
                     next_s_read_state <= "0010";
-                    di_i <= din;
                 when "0010" =>
                     next_s_read_state <= "0011";
+                    di_i <= din;
                     currcount := currcount + 1;
-                    addr <= "00000000" & std_logic_vector(currcount);
+                    addr <= std_logic_vector(currcount);
                     -- We toggle ssel like this because it resets the position
                     -- if we change our mind about di_i.
                     spi_ssel_i <= '0';

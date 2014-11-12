@@ -15,7 +15,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="13" />
+   <WVObjectSize size="14" />
    <wvobject fp_name="/ft_controller_tb/clk1" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">clk1</obj_property>
       <obj_property name="ObjectShortName">clk1</obj_property>
@@ -67,5 +67,9 @@
    <wvobject fp_name="/ft_controller_tb/uut/theaddr" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">theaddr[11:0]</obj_property>
       <obj_property name="ObjectShortName">theaddr[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ft_controller_tb/uut/oi1/s_read_state" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">s_read_state[3:0]</obj_property>
+      <obj_property name="ObjectShortName">s_read_state[3:0]</obj_property>
    </wvobject>
 </wave_config>
