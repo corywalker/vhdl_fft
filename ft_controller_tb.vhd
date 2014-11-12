@@ -50,7 +50,9 @@ ARCHITECTURE behavior OF ft_controller_tb IS
     PORT(
          CLK1 : IN  std_logic;
          rst : IN  std_logic;
-         pmod_miso : IN  std_logic
+         adc_miso : IN  std_logic;
+         start_i : IN  std_logic;
+         sck_i : IN  std_logic
         );
     END COMPONENT;
     
@@ -58,6 +60,7 @@ ARCHITECTURE behavior OF ft_controller_tb IS
    --Inputs
    signal CLK1 : std_logic := '0';
    signal rst : std_logic := '0';
+   signal start : std_logic := '0';
 
    -- Clock period definitions
    constant CLK1_period : time := 10 ns;
@@ -76,7 +79,9 @@ BEGIN
         PORT MAP (
           CLK1 => CLK1,
           rst => rst,
-          pmod_miso => '0'
+          start_i => start,
+          sck_i => '0',
+          adc_miso => '0'
         );
 
    -- Clock process definitions
@@ -94,6 +99,10 @@ BEGIN
    begin		
       -- hold reset state for 100 ns.
       wait for 100 ns;	
+      
+      start <= '1';
+      wait for 10 ns;	
+      start <= '0';
 
       wait for CLK1_period*10;
 

@@ -30,6 +30,6 @@ NET "CLK1" LOC = P54;
  
  
  # 6 pin connectors                                                                                                                        
- NET "pmod_conv" LOC = "P81"; # Bank = 1, Pin name = IO_L3P_1/A12,            Sch name = JA-1
- NET "pmod_sck" LOC = "P91"; # Bank = 1, Pin name = IO_L6P_1/A6/GCLK8/IRDY1, Sch name = JA-2
- NET "pmod_miso" LOC = "P82"; # Bank = 1, Pin name = IO_L3N_1/A11,            Sch name = JA-3
+ NET "adc_conv" LOC = "P81"; # Bank = 1, Pin name = IO_L3P_1/A12,            Sch name = JA-1
+ NET "adc_sck" LOC = "P91"; # Bank = 1, Pin name = IO_L6P_1/A6/GCLK8/IRDY1, Sch name = JA-2
+ NET "adc_miso" LOC = "P82"; # Bank = 1, Pin name = IO_L3N_1/A11,            Sch name = JA-3

@@ -21,9 +21,15 @@ entity ft_controller is
     );
 	port(
         CLK1: in std_logic;
-        pmod_conv: out std_logic;
-        pmod_sck: out std_logic;
-        pmod_miso: in std_logic;
+        adc_conv: out std_logic;
+        adc_sck: out std_logic;
+        adc_miso: in std_logic;
+        
+        start_i: in std_logic;
+        busy_o: out std_logic;
+        sck_i: in std_logic;
+        miso_o: out std_logic;
+        
         Led : out std_logic_vector(7 downto 0) := "10001000";
         rst : in std_logic
     );
@@ -67,9 +73,9 @@ begin
             wea => br_wea,
             addr => br_addra,
             dout => br_dina,
-            pmod_conv => pmod_conv,
-            pmod_sck => pmod_sck,
-            pmod_miso => pmod_miso,
+            adc_conv => adc_conv,
+            adc_sck => adc_sck,
+            adc_miso => adc_miso,
             rst => rst
         );
         
@@ -80,6 +86,17 @@ begin
             addra => theaddr,
             dina => br_dina,
             douta => br_douta
+        );
+        
+    oi1: entity work.outbuf_interp
+        generic map (
+            N => N
+        )
+        port map (
+            CLK1 => CLK1,
+            spi_sck_i => sck_i,
+            addr_rst => '0',
+            spi_miso_o => miso_o
         );
         
     theaddr <= br_addra when cc_busy = '1' else "000000000010";
