@@ -9,11 +9,11 @@ void setup() {
   pinMode(clockPin, OUTPUT);
   pinMode(dataPin, INPUT);
   // initialize serial:
-  Serial.begin(115200);
+  Serial.begin(57600);
 }
 
 int iter = 0;
-boolean DEBUG = true;
+boolean DEBUG = false;
 
 void loop() {
   boolean tostart = DEBUG;
@@ -60,10 +60,12 @@ void loop() {
         Serial.write(lowByte(val));
         Serial.write(highByte(val));
       }
+      Serial.flush();
     }
     if (DEBUG) {
       Serial.println("read done");
       delay(1000);
     }
+    //Serial.println("done");
   }
 }

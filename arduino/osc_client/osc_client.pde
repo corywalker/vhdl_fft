@@ -11,7 +11,7 @@ void setup() {
   s = new Serial(this, "/dev/tty.usbmodem14211", 115200);
   
   size(550, 256);
-  frameRate(3);
+  loop();
 }
 
 void delay(int delay)
@@ -24,15 +24,21 @@ void draw() {
   println("starting read");
   s.write(83);
   int x = 0;
-  background(220);
+  //background(220);
+  int time = millis();
   for (int i = 0; i < 512; i++) {
+    while (s.available() < 2) {
+      if (millis() - time >= 250) {
+        return;
+      }
+    }
     int im = s.read();
     int real = s.read();
-    println(real);
-    stroke(90, 76, 99);
-    line(x, height, x, height - real);
+    println(i, real);
+    //stroke(90, 76, 99);
+    //line(x, height, x, height - real);
     x++;
   }
-  s.clear();
+  delay(100);
   println("done");
 }
