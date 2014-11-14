@@ -12,16 +12,39 @@ void setup() {
   loop();
 }
 
+void delay(int delay)
+{
+  int time = millis();
+  while(millis() - time <= delay);
+}
+
 void draw() {
+  myPort.write(83); //S
+  boolean first = true;
+  
   int time = millis();
   int i = 0;
+  println("drawing");
   while (millis() - time < 500) {
+    //println(millis() - time);
     while (myPort.available() > 0) {
+      //println("waiting on read");
       int inByte = myPort.read();
       println(i, inByte);
       i++;
+      if (i == 1024) {
+        return;
+      }
+      if (i % 2 == 0) {
+        myPort.write(82);
+      }
       time = millis();
     }
   }
-  myPort.write(83);
+  delay(100);
+  
+    while (myPort.available() > 0) {
+      //println("waiting on read");
+      int inByte = myPort.read();
+    }
 }

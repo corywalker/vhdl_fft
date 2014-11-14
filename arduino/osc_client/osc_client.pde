@@ -39,6 +39,6 @@ void draw() {
     //line(x, height, x, height - real);
     x++;
   }
-  delay(100);
   println("done");
+  delay(100);
 }
