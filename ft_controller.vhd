@@ -13,7 +13,7 @@ entity ft_controller is
         -- INT_EXT_SEL:
         -- '0' for determ_adc, '1' for external.
         
-        SIZE : positive := 64;
+        SIZE : positive := 512;
         DELAY : positive := 10000;
         INT_EXT_SEL: std_logic := '1';
         SPI_2X_CLK_DIV: positive := 40;
@@ -108,10 +108,10 @@ begin
     busy_o <= cc_busy;
     addr_rst <= cc_busy;
         
-    process(CLK1)
+    process(cc_busy)
     begin
     
-        if rising_edge(CLK1) then
+        if falling_edge(cc_busy) then
             Led <= br_douta(14 downto 7);
         end if;
     
