@@ -1,9 +1,11 @@
 import serial
+import struct
 
-ser = serial.Serial("/dev/tty.usbmodem14211", 57600, timeout=1)
+SIZE = 512
+ser = serial.Serial("/dev/tty.usbmodem14211", 500000, timeout=0.2)
 
-for i in range(5):
+for i in range(50):
     ser.write("S")
-    print repr(ser.read(2))
-    ser.write("R")
-    print repr(ser.read(2))
+    data = ser.read(SIZE*2)
+    if len(data) == SIZE*2:
+        print struct.unpack('BB'*SIZE, data)
