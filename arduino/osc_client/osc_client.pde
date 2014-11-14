@@ -11,9 +11,8 @@ void setup() {
   s = new Serial(this, "/dev/tty.usbmodem14211", 115200);
   
   size(550, 256);
-  frameRate(5);
+  frameRate(3);
 }
-
 
 void delay(int delay)
 {
@@ -35,15 +34,5 @@ void draw() {
     x++;
   }
   s.clear();
-  /*
-  int inByte = 0;
-  int bytesread = 0;
-  while (bytesread < 4) {
-    while (s.available() > 0 ) {
-      inByte = s.read();
-      println(inByte);
-      bytesread += 1;
-    }
-  }*/
   println("done");
 }
