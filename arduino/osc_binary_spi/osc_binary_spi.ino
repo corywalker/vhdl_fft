@@ -1,15 +1,24 @@
-int startPin = 2;
-int busyPin = 3;
-int clockPin = 13;
-int dataPin = 12;
+
+#define STARTPIN 2
+#define BUSYPIN 3
+#define CLOCKPIN 13
+#define DATAPIN 12
+
+#define DEBUG false
+
+#if DEBUG
+#define toread 4
+#else
+#define toread 512
+#endif
 
 byte clr;
 
 void setup() {
-  pinMode(startPin, OUTPUT);
-  pinMode(busyPin, INPUT);
-  pinMode(clockPin, OUTPUT);
-  pinMode(dataPin, INPUT);
+  pinMode(STARTPIN, OUTPUT);
+  pinMode(BUSYPIN, INPUT);
+  pinMode(CLOCKPIN, OUTPUT);
+  pinMode(DATAPIN, INPUT);
   pinMode(10, OUTPUT);
   
   // SPCR = 01010000
@@ -32,9 +41,6 @@ char spi_transfer(volatile char data)
   return SPDR;                    // return the received byte
 }
 
-int iter = 0;
-boolean DEBUG = false;
-
 void loop() {
   boolean tostart = DEBUG;
   if (!DEBUG && Serial.available() > 0) {
@@ -51,18 +57,14 @@ void loop() {
       Serial.println("read starting");
       
     // Throw out first bit
-    digitalWrite(startPin, HIGH);
-    digitalWrite(startPin, LOW);
+    digitalWrite(STARTPIN, HIGH);
+    digitalWrite(STARTPIN, LOW);
     
-    delayMicroseconds(5);
+    //delayMicroseconds(5);
     
-    while(digitalRead(busyPin)) {}
+    while(digitalRead(BUSYPIN)) {}
     
-    delayMicroseconds(5);
-    
-    int toread = 512;
-    if (DEBUG)
-      toread = 4;
+    //delayMicroseconds(5);
     
     for (int j = 0; j < toread*2; j++) {
       
