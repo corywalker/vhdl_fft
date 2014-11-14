@@ -2,7 +2,7 @@ import serial
 import struct
 
 SIZE = 512
-ser = serial.Serial("/dev/tty.usbmodem14211", 500000, timeout=0.2)
+ser = serial.Serial("/dev/tty.usbmodem14211", 500000, timeout=0.05)
 
 for i in range(50):
     ser.write("S")
