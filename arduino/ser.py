@@ -1,11 +1,5 @@
-import serial
-import struct
+from vhdlfft import VHDLFFT
 
-SIZE = 512
-ser = serial.Serial("/dev/tty.usbmodem14211", 500000, timeout=0.05)
-
+vf = VHDLFFT("/dev/tty.usbmodem14211", 512, 9)
 while True:
-    ser.write("S")
-    data = ser.read(SIZE*2)
-    if len(data) == SIZE*2:
-        print struct.unpack('BB'*SIZE, data)
+    print vf.read()
