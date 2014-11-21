@@ -42,6 +42,7 @@ ARCHITECTURE behavior OF ft_controller_tb IS
     COMPONENT ft_controller
     generic (
         SIZE : positive;
+        SIZELOG : positive;
         DELAY : positive;
         INT_EXT_SEL: std_logic;
         SPI_2X_CLK_DIV: positive;
@@ -73,7 +74,8 @@ BEGIN
 	-- Instantiate the Unit Under Test (UUT)
    uut: ft_controller
         generic map (
-            SIZE => 5,
+            SIZE => 4,
+            SIZELOG => 2,
             DELAY => 300,
             INT_EXT_SEL => '0',
             SPI_2X_CLK_DIV => 2,

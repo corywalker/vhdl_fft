@@ -14,6 +14,7 @@ entity ft_controller is
         -- '0' for determ_adc, '1' for external.
         
         SIZE : positive := 512;
+        SIZELOG : positive := 9;
         DELAY : positive := 10000;
         INT_EXT_SEL: std_logic := '1';
         SPI_2X_CLK_DIV: positive := 40;
@@ -63,6 +64,7 @@ begin
         generic map (
             N => N,
             SIZE => SIZE,
+            SIZELOG => SIZELOG,
             ADDRWIDTH => ADDRWIDTH,
             INT_EXT_SEL => INT_EXT_SEL,
             SPI_2X_CLK_DIV => SPI_2X_CLK_DIV,

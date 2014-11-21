@@ -7,6 +7,7 @@ entity cap_controller is
         N : positive := 16;
         ADDRWIDTH : positive := 10;
         SIZE : positive := 64;
+        SIZELOG : positive := 6;
         INT_EXT_SEL: std_logic;
         SPI_2X_CLK_DIV: positive;
         DA_RESET_DELAY: positive
@@ -40,6 +41,7 @@ architecture Behavioral of cap_controller is
     signal sm_state_dbg: std_logic_vector (3 downto 0);
     signal sm_valid: std_logic;
     signal theaddress : integer range SIZE-1 downto 0 := 0;
+    signal addr_vect : std_logic_vector(ADDRWIDTH-1 DOWNTO 0);
 
 begin
 
@@ -91,7 +93,9 @@ begin
     -- Only write if the SPI master out is valid and we are currently capturing
     wea(0) <= sm_valid and thebusy;
     conv <= '0' when sm_state_dbg = "0001" else '1';
-    addr <= std_logic_vector(to_unsigned(theaddress, addr'length));
+    addr_vect <= std_logic_vector(to_unsigned(theaddress, addr'length));
+    addr(SIZELOG-1 downto 0) <= addr_vect(SIZELOG-1 downto 0);
+    addr(ADDRWIDTH-1 downto SIZELOG) <= (others=>'0');
     dout <= sm_data_buf(14 downto 7) & "00000000";
         
     process(CLK1)
