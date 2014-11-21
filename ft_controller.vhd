@@ -24,12 +24,12 @@ entity ft_controller is
         CLK1: in std_logic;
         adc_conv: out std_logic;
         adc_sck: out std_logic;
-        adc_miso: in std_logic;
+        adc_miso: in std_logic; 
         
-        start_i: in std_logic;
-        busy_o: out std_logic;
-        sck_i: in std_logic;
-        miso_o: out std_logic;
+        start_i: in std_logic; -- high when arduino is reading data
+        busy_o: out std_logic; -- high when performing fft
+        sck_i: in std_logic; -- to arduino
+        miso_o: out std_logic; -- to arduino
         
         Led : out std_logic_vector(7 downto 0) := "10001000";
         rst : in std_logic
