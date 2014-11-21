@@ -1,7 +1,7 @@
 Release 14.7 - par P.20131013 (nt)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-Fri Nov 21 11:46:29 2014
+Fri Nov 21 13:29:39 2014
 
 
 INFO: The IO information is provided in three file formats as part of the Place and Route (PAR) process.  These formats are:
@@ -25,13 +25,13 @@ Pinout by Pin Number:
 |P3        |Led<6>     |IOB      |IO_L01N_3                |OUTPUT   |LVCMOS25*  |3             |12        |SLOW     |NONE**     |         |         |LOCATED   |YES        |NONE            |
 |P4        |Led<5>     |IOB      |IO_L02P_3                |OUTPUT   |LVCMOS25*  |3             |12        |SLOW     |NONE**     |         |         |LOCATED   |YES        |NONE            |
 |P5        |Led<4>     |IOB      |IO_L02N_3/VREF_3         |OUTPUT   |LVCMOS25*  |3             |12        |SLOW     |NONE**     |         |         |LOCATED   |YES        |NONE            |
-|P6        |           |IBUF     |IP                       |UNUSED   |           |3             |          |         |           |         |         |          |           |                |
+|P6        |rst        |IBUF     |IP                       |INPUT    |LVCMOS25*  |3             |          |         |           |NONE     |         |UNLOCATED |NO         |NONE            |
 |P7        |Led<3>     |IOB      |IO_L03P_3                |OUTPUT   |LVCMOS25*  |3             |12        |SLOW     |NONE**     |         |         |LOCATED   |YES        |NONE            |
 |P8        |Led<2>     |IOB      |IO_L03N_3                |OUTPUT   |LVCMOS25*  |3             |12        |SLOW     |NONE**     |         |         |LOCATED   |YES        |NONE            |
 |P9        |           |         |VCCINT                   |         |           |              |          |         |           |         |1.2      |          |           |                |
 |P10       |           |IOB      |IO                       |UNUSED   |           |3             |          |         |           |         |         |          |           |                |
 |P11       |           |         |GND                      |         |           |              |          |         |           |         |         |          |           |                |
-|P12       |rst        |IBUF     |IP/VREF_3                |INPUT    |LVCMOS25*  |3             |          |         |           |NONE     |         |UNLOCATED |NO         |NONE            |
+|P12       |           |IBUF     |IP/VREF_3                |UNUSED   |           |3             |          |         |           |         |         |          |           |                |
 |P13       |           |         |VCCO_3                   |         |           |3             |          |         |           |         |2.50     |          |           |                |
 |P14       |Led<1>     |IOB      |IO_L04P_3/LHCLK0         |OUTPUT   |LVCMOS25*  |3             |12        |SLOW     |NONE**     |         |         |LOCATED   |YES        |NONE            |
 |P15       |Led<0>     |IOB      |IO_L04N_3/LHCLK1         |OUTPUT   |LVCMOS25*  |3             |12        |SLOW     |NONE**     |         |         |LOCATED   |YES        |NONE            |

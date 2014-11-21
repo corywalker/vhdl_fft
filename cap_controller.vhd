@@ -94,9 +94,13 @@ begin
     wea(0) <= sm_valid and thebusy;
     conv <= '0' when sm_state_dbg = "0001" else '1';
     addr_vect <= std_logic_vector(to_unsigned(theaddress, addr'length));
-    addr(SIZELOG-1 downto 0) <= addr_vect(SIZELOG-1 downto 0);
+    
+    gen: for i in 0 to SIZELOG-1 generate
+        addr(i) <= addr_vect(SIZELOG-i-1);
+    end generate;
+    --addr(SIZELOG-1 downto 0) <= addr_vect(SIZELOG-1 downto 0);
     addr(ADDRWIDTH-1 downto SIZELOG) <= (others=>'0');
-    dout <= sm_data_buf(14 downto 7) & "00000000";
+    dout <= "0" & sm_data_buf(14 downto 8) & "00000000";
         
     process(CLK1)
         variable address : integer range SIZE-1 downto 0 := 0;
