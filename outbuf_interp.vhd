@@ -12,7 +12,7 @@ entity outbuf_interp is
 	port(
         CLK1, spi_sck_i, addr_rst: in std_logic;
         spi_miso_o: out std_logic;
-        addr : OUT STD_LOGIC_VECTOR(ADDRWIDTH-1 DOWNTO 0) := "000000000000";
+        addr : OUT STD_LOGIC_VECTOR(ADDRWIDTH-1 DOWNTO 0) := "0000000000";
         din : IN STD_LOGIC_VECTOR(N-1 DOWNTO 0)
     );
 end outbuf_interp;
