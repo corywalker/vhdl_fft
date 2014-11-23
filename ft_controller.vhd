@@ -75,8 +75,8 @@ architecture Behavioral of ft_controller is
              );
     END COMPONENT;
 
-    type state_type is (cc_write, fft_read, wait_for_valid, fft_write, oi_read);
-    signal curr_state, next_state : state_type;
+    type state_type is (idle, cc_write, fft_read, wait_for_valid, fft_write, oi_read);
+    signal curr_state, next_state : state_type := idle;
 
     signal start, unload, wnr : std_logic := '0';
     signal xn_re, xn_im : std_logic_vector(7 downto 0) := (others => '0');
@@ -178,14 +178,14 @@ begin
              );
 
     --theaddr <= br_addra when cc_busy = '1' else oi_addr_o;
-    busy_o <= cc_busy or fftbusy;
+    --busy_o <= cc_busy or fftbusy;
     addr_rst <= cc_busy;
 
     curr_logic : process (CLK1, rst)
     begin
         if rising_edge(CLK1) then
-            if rst = '1' or cc_busy = '1' then
-                curr_state <= cc_write;
+            if rst = '1' then
+                curr_state <= idle;
             else
                 curr_state <= next_state;
             end if;
@@ -199,7 +199,12 @@ begin
         if rising_edge(CLK1) then
             Led <= br_douta(14 downto 7);
             case curr_state is
+                when idle =>
+                    if cc_busy = '1' then
+                        next_state <= cc_write;
+                    end if;
                 when cc_write =>
+                    busy_o <= '1';
                     wnr <= '1';
                     br_dina <= cc_out;
                     theaddr <= br_addra;
@@ -209,6 +214,7 @@ begin
                         next_state <= fft_read;
                     end if;
                 when fft_read =>
+                    busy_o <= '1';
                     wnr <= '0';
                     theaddr <= std_logic_vector(to_unsigned(index, theaddr'length));
                     xn_re <= br_douta(15 downto 8);
@@ -221,21 +227,25 @@ begin
                         next_state <= wait_for_valid;
                     end if;
                 when wait_for_valid =>
+                    unload <= '1';
                     if dv = '1' then
-                        unload <= '1';
+                        unload <= '0';
                         next_state <= fft_write;
                     end if;
                 when fft_write =>
+                    busy_o <= '1';
                     wnr <= '1';
                     index := mbase + to_integer(unsigned(xk_index));
                     br_dina <= xk_re & xk_im;            
                     theaddr <= std_logic_vector(to_unsigned(index, theaddr'length));
                     if dv = '0' then
+                        busy_o <= '0';
                         unload <= '0';
                         index := 0;
                         next_state <= oi_read;
                     end if;
                 when oi_read =>
+                    busy_o <= '0';
                     wnr <= '0';
                     theaddr <= std_logic_vector(to_unsigned(mbase, theaddr'length)) & oi_addr_o;
                     oi_in <= br_douta;
