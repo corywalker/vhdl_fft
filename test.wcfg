@@ -3,73 +3,69 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="C:/Users/John/Code/vhdl_fft/ft_controller_tb_isim_beh.wdb" id="1" type="auto">
+      <db_ref path="C:/Users/gmassman/Documents/vhdl_fft/ft_controller_tb_isim_beh.wdb" id="1" type="auto">
          <top_modules>
             <top_module name="ft_controller_tb" />
             <top_module name="numeric_std" />
             <top_module name="std_logic_1164" />
             <top_module name="std_logic_arith" />
-            <top_module name="std_logic_textio" />
+            <top_module name="std_logic_signed" />
             <top_module name="std_logic_unsigned" />
             <top_module name="textio" />
+            <top_module name="vcomponents" />
+            <top_module name="vital_primitives" />
+            <top_module name="vital_timing" />
+            <top_module name="vpkg" />
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="14" />
+   <WVObjectSize size="12" />
    <wvobject fp_name="/ft_controller_tb/clk1" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">clk1</obj_property>
       <obj_property name="ObjectShortName">clk1</obj_property>
    </wvobject>
-   <wvobject fp_name="/ft_controller_tb/uut/cc1/spi_sck" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">spi_sck</obj_property>
-      <obj_property name="ObjectShortName">spi_sck</obj_property>
+   <wvobject fp_name="/ft_controller_tb/uut/curr_state" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">curr_state</obj_property>
+      <obj_property name="ObjectShortName">curr_state</obj_property>
    </wvobject>
-   <wvobject fp_name="/ft_controller_tb/uut/cc1/start" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">start</obj_property>
-      <obj_property name="ObjectShortName">start</obj_property>
+   <wvobject fp_name="/ft_controller_tb/uut/br_dina" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">br_dina[15:0]</obj_property>
+      <obj_property name="ObjectShortName">br_dina[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/ft_controller_tb/uut/cc1/busy" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">busy</obj_property>
-      <obj_property name="ObjectShortName">busy</obj_property>
+   <wvobject fp_name="/ft_controller_tb/uut/br_douta" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">br_douta[15:0]</obj_property>
+      <obj_property name="ObjectShortName">br_douta[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/ft_controller_tb/uut/br_wea" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">br_wea[0:0]</obj_property>
-      <obj_property name="ObjectShortName">br_wea[0:0]</obj_property>
+   <wvobject fp_name="/ft_controller_tb/uut/theaddr" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">theaddr[9:0]</obj_property>
+      <obj_property name="ObjectShortName">theaddr[9:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/ft_controller_tb/uut/led" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">led[7:0]</obj_property>
-      <obj_property name="ObjectShortName">led[7:0]</obj_property>
+   <wvobject fp_name="/ft_controller_tb/uut/xn_re" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">xn_re[7:0]</obj_property>
+      <obj_property name="ObjectShortName">xn_re[7:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/ft_controller_tb/start" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">start</obj_property>
-      <obj_property name="ObjectShortName">start</obj_property>
+   <wvobject fp_name="/ft_controller_tb/uut/xn_index" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">xn_index[8:0]</obj_property>
+      <obj_property name="ObjectShortName">xn_index[8:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/ft_controller_tb/busy" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">busy</obj_property>
-      <obj_property name="ObjectShortName">busy</obj_property>
+   <wvobject fp_name="/ft_controller_tb/uut/xk_re" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">xk_re[7:0]</obj_property>
+      <obj_property name="ObjectShortName">xk_re[7:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/ft_controller_tb/uut/cc1/da1/ss1/di_i" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">di_i[15:0]</obj_property>
-      <obj_property name="ObjectShortName">di_i[15:0]</obj_property>
+   <wvobject fp_name="/ft_controller_tb/uut/xk_im" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">xk_im[7:0]</obj_property>
+      <obj_property name="ObjectShortName">xk_im[7:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/ft_controller_tb/sck" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">sck</obj_property>
-      <obj_property name="ObjectShortName">sck</obj_property>
+   <wvobject fp_name="/ft_controller_tb/uut/xk_index" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">xk_index[8:0]</obj_property>
+      <obj_property name="ObjectShortName">xk_index[8:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/ft_controller_tb/uut/miso_o" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">miso_o</obj_property>
       <obj_property name="ObjectShortName">miso_o</obj_property>
    </wvobject>
-   <wvobject fp_name="/ft_controller_tb/uut/oi1/di_i" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">di_i[15:0]</obj_property>
-      <obj_property name="ObjectShortName">di_i[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/ft_controller_tb/uut/theaddr" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">theaddr[11:0]</obj_property>
-      <obj_property name="ObjectShortName">theaddr[11:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/ft_controller_tb/uut/oi1/s_read_state" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">s_read_state[3:0]</obj_property>
-      <obj_property name="ObjectShortName">s_read_state[3:0]</obj_property>
+   <wvobject fp_name="/ft_controller_tb/uut/oi1/ss1/spi_sck_i" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">spi_sck_i</obj_property>
+      <obj_property name="ObjectShortName">spi_sck_i</obj_property>
    </wvobject>
 </wave_config>

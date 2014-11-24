@@ -74,8 +74,8 @@ BEGIN
 	-- Instantiate the Unit Under Test (UUT)
    uut: ft_controller
         generic map (
-            SIZE => 4,
-            SIZELOG => 2,
+            SIZE => 512,
+            SIZELOG => 9,
             DELAY => 300,
             INT_EXT_SEL => '0',
             SPI_2X_CLK_DIV => 2,
@@ -117,7 +117,7 @@ BEGIN
       wait until busy = '0';
       wait for 1us;
       
-      for I in 0 to 5*16 loop
+      for I in 0 to 512*16 loop
           sck <= '1';
           wait for 30 ns;
           sck <= '0';
