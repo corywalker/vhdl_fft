@@ -141,6 +141,13 @@
         \label{overflow}
       \end{figure}
       The ADC PMOD accepts any input analog input and converts it to a SPI bus that the FPGA can read. The analog signal is fed into the onboard ADS7818 chip. Unfortunately, this chip operates at 5 V but the FPGA operates at 3.3 V. Because of this, there is a voltage divider to drop the voltage down to the FPGA. For FPGA output to be read by the ADS7818, we added a Schmitt inverter IC wired as a Schmitt trigger to act as a level converter.
+      \begin{figure}[H]
+        \centering
+        \includegraphics[width=100mm]{adc_logic.png}
+        \caption{ADC interfacing}
+        \label{overflow}
+      \end{figure}
+      We started interfacing with the ADS7818 using an Arduino. Once we understood the protocol completely, we moved the interfacing code from the Arduino to the FPGA and started using real signal data.
 
     \subsection*{Arduino}
       The Arduino functions as a means of getting the processed information out of the FPGA's BRAM. The Arduino turned out to be the main bottleneck in terms of framerate to the computer's display. We had to push the SPI and serial write functions outside of recommended bounds to get a fluid framerate on the computer display. The full software is available in the \texttt{arduino/osc\_binary\_spi} directory of the source code repository.
@@ -156,15 +163,23 @@
       \caption{Block diagram of the FFT chip}
       \label{overflow}
     \end{figure}
-    All of the blocks inside the FPGA device are referred to as micro-components. \\
+    All of the blocks inside the FPGA device are referred to as micro-components.
 
-    TODO: DESCRIPTION OF EACH COMPONENT HERE
-
-  \section*{Steps Taken}
+    \begin{itemize}
+      \item Deterministic ADC: Provides a completely predictable ADC signal to test with and substituted for a real ADC while it was shipping.
+      \item SPI Mux: A simple multiplexer that selects between the external ADC and the deterministic ADC.
+      \item SPI Master: An OpenCore that implements an SPI master interface. This handles the control and reading of the SPI bus from either the deterministic ADC or the external ADC.
+      \item Capture Controller: This block reads samples from the SPI Master and stores the readings as complex numbers in the input buffer. The sample size is 512. It also communicates with the FT controller about when it finishes.
+      \item FT controller: This block actually executes the fast Fourier transfer algorithm whenever the capture controller indicates that the input buffer is valid.
+      \item Complex ALU: This block handles complex multiplications for the FT controller.
+      \item OUTBUF interpreter: This block facilitates the reading of the OUTBUF by feeding words into the SPI slave module.
+      \item SPI Slave: An OpenCore that implements an SPI slave interface. This handles the control and writing of the SPI bus, and it connects to an external microcontroller.
+    \end{itemize}
 
   \section*{Simulation Results}
 
   \section*{Results}
+    He seemed really excited about timing results so we should probably discuss this here.
 
   \section*{Roadblocks}
 
