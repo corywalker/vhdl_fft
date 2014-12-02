@@ -4,7 +4,7 @@ from vhdlfft import VHDLFFT
 root = Tk()
 root.title("move-and-erase")
 cw = 512 # canvas width
-ch = 256 # canvas height
+ch = 512 # canvas height
 
 chart_1 = Canvas(root, width=cw, height=ch, background="white")
 chart_1.grid(row=0, column=0)
@@ -21,7 +21,7 @@ for i in range(1,500):   # end the program after 500 position shifts.
     print len(data)
     if len(data) == SIZE:
         for x, mag in enumerate(data):
-            chart_1.create_line(x, 0, x, mag)
+            chart_1.create_line(x, ch, x, ch-mag)
 
         chart_1.update() # This refreshes the drawing on the canvas.
         #chart_1.after(cycle_period) # This makes execution pause for 200

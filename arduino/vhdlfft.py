@@ -33,7 +33,7 @@ class VHDLFFT(object):
         if len(data) == self.SIZE*2:
             outbuf = struct.unpack('BB'*self.SIZE, data)
             outbuf = list(chunks(outbuf, 2))
-            outbuf = reverse_bit_order(outbuf, self.LOGSIZE)
+            #outbuf = reverse_bit_order(outbuf, self.LOGSIZE)
             return outbuf
         return []
 
