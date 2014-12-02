@@ -42,7 +42,7 @@
 
 % METADATA
 \title{\textbf{FPGA Implementation of the Fast Fourier Transform}}
-\date{September 13, 2014}
+\date{December 2, 2014}
 \author{Garrett Massman and Cory Walker}
 
 \begin{document}
@@ -53,7 +53,7 @@
   \section*{Introduction}
     In this project we implemented a fast Fourier transform algorithm on a Xilinx FPGA using VHDL. The primary motivation of our project was to digitally analyze musical signals, but the use cases for an FFT chip far surpass that specific use case. \\
     
-    As a very general overview, our completed device functions by sampling an analog signal for a set amount of time and storing the data into an input buffer in BRAM. Next, the signal is is processed using an FT controller and a complex ALU and stored in an output buffer. Finally, a microcontroller can then read the output buffer over a standard SPI interface. From there the processed frequency domain data can be sent to a computer for further processing or any other device.
+    As a very general overview, our completed device functions by sampling an analog signal for a set amount of time and storing the data into an input buffer in BRAM. Next, the signal is is processed using an FT controller and a complex ALU and stored in an output buffer. Finally, a microcontroller can then read the output buffer over a standard SPI protocol. From there the processed frequency domain data can be sent to a computer for further processing or any other device.
 
   \section*{Theory}
     To understand the discrete Fourier transform, one must first analyze its analogous continuous    time form.
@@ -114,6 +114,30 @@
     These external components condition the signal and then send the digital signal into the FPGA at the right voltage level. In addition, the FPGA's output buffer must be read out by an Arduino microcrontroller and sent to a computer with the right software to parse and display the output. We call these external components macro-components and we call the FPGA internal blocks micro-components.
   
   \section*{Macro-Component Descriptions}
+    The required components external to the FPGA are as follows:
+    \subsection*{Audio signal module}
+      \begin{figure}[H]
+        \centering
+        \includegraphics[width=60mm]{audio_sig_mod.JPG}
+        \caption{Audio signal circuit board with audio connector}
+        \label{overflow}
+      \end{figure}
+      The audio signal module tailors the input audio signal for conversion with the ADC. Traditional audio signals are centered around 0 V and are in the negative voltage range half the time. This module biases the signal by 2.5 V, allowing for a 5 V variation peak to peak in the audio signal without any clipping. This module also provides filtering capacitors that remove most of the supply rail noise that may be present.
+
+    \subsection*{ADC PMOD}
+      \begin{figure}[H]
+        \centering
+        \includegraphics[width=75mm]{adc_pmod.JPG}
+        \caption{ADC PMOD circuit board}
+        \label{overflow}
+      \end{figure}
+      The ADC PMOD accepts any input analog input and converts it to a SPI bus that the FPGA can read. The analog signal is fed into the onboard ADS7818 chip. Unfortunately, this chip operates at 5 V but the FPGA operates at 3.3 V. Because of this, there is a voltage divider to drop the voltage down to the FPGA. For FPGA output to be read by the ADS7818, we added a Schmitt inverter IC wired as a Schmitt trigger to act as a level converter.
+
+    \subsection*{Arduino}
+      The Arduino functions as a means of getting the processed information out of the FPGA's BRAM. The Arduino turned out to be the main bottleneck in terms of framerate to the computer's display. We had to push the SPI and serial write functions outside of recommended bounds to get a fluid framerate on the computer display. The full software is available in the \texttt{arduino/osc\_binary\_spi} directory of the source code repository.
+
+    \subsection*{Computer software}
+      The computer software for this project is divided into two components. The first component is the Python module that facilitates the reading and decoding of the data from the serial port. It will read out 512 complex numbers and, optionally, compute the magnitude of each of those numbers. The second component is the actual display. It will use the Python module to read the device and it uses Tkinter to display the plot on the screen.
 
   \section*{Micro-Component Descriptions}
     The final block diagram of our device is as follows:
@@ -130,6 +154,8 @@
   \section*{Steps Taken}
 
   \section*{Simulation Results}
+
+  \section*{Results}
 
   \section*{Roadblocks}
 
