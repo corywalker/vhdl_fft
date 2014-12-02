@@ -51,7 +51,9 @@
   \clearpage
 
   \section*{Introduction}
-    In this project we implemented a fast Fourier transform algorithm on a Xilinx FPGA using VHDL. The primary motivation of our project was to digitally analyze musical signals, but the use cases for an FFT chip far surpass that specific use case. As a very general overview, our completed device functions by sampling an analog signal for a set amount of time and storing the data into an input buffer in BRAM. Next, the signal is is processed using an FT controller and a complex ALU and stored in an output buffer. Finally, a microcontroller can then read the output buffer over a standard SPI interface. From there the processed frequency domain data can be sent to a computer for further processing or any other device.
+    In this project we implemented a fast Fourier transform algorithm on a Xilinx FPGA using VHDL. The primary motivation of our project was to digitally analyze musical signals, but the use cases for an FFT chip far surpass that specific use case. \\
+    
+    As a very general overview, our completed device functions by sampling an analog signal for a set amount of time and storing the data into an input buffer in BRAM. Next, the signal is is processed using an FT controller and a complex ALU and stored in an output buffer. Finally, a microcontroller can then read the output buffer over a standard SPI interface. From there the processed frequency domain data can be sent to a computer for further processing or any other device.
 
   \section*{Theory}
     To understand the discrete Fourier transform, one must first analyze its analogous continuous    time form.
@@ -100,6 +102,16 @@
   \section*{Motivation}
 
   \section*{System Overview}
+    A critical task in building our FFT device was converting an arbitrary waveform into the SPI signal input that the FPGA expected. This requires the use of a fast analog to digital converter. The Xilinx Spartan 3E FPGA does not come with an onboard ADC. Because of this, a large percentage of the work was actually electronics work done outside of the FPGA:
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=100mm]{full_system.JPG}
+      \caption{Full system including ADC PMOD and audio signal module.}
+      \label{overflow}
+    \end{figure}
+    
+    These external components condition the signal and then send the digital signal into the FPGA at the right voltage level. In addition, the FPGA's output buffer must be read out by an Arduino microcrontroller and sent to a computer with the right software to parse and display the output. We call these external components macro-components and we call the FPGA internal blocks micro-components.
   
   \section*{Macro-Component Descriptions}
 
