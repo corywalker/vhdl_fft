@@ -132,6 +132,13 @@
         \label{overflow}
       \end{figure}
       The ADC PMOD accepts any input analog input and converts it to a SPI bus that the FPGA can read. The analog signal is fed into the onboard ADS7818 chip. Unfortunately, this chip operates at 5 V but the FPGA operates at 3.3 V. Because of this, there is a voltage divider to drop the voltage down to the FPGA. For FPGA output to be read by the ADS7818, we added a Schmitt inverter IC wired as a Schmitt trigger to act as a level converter.
+      \begin{figure}[H]
+        \centering
+        \includegraphics[width=100mm]{adc_logic.png}
+        \caption{ADC interfacing}
+        \label{overflow}
+      \end{figure}
+      We started interfacing with the ADS7818 using an Arduino. Once we understood the protocol completely, we moved the interfacing code from the Arduino to the FPGA and started using real signal data.
 
     \subsection*{Arduino}
       The Arduino functions as a means of getting the processed information out of the FPGA's BRAM. The Arduino turned out to be the main bottleneck in terms of framerate to the computer's display. We had to push the SPI and serial write functions outside of recommended bounds to get a fluid framerate on the computer display. The full software is available in the \texttt{arduino/osc\_binary\_spi} directory of the source code repository.
