@@ -51,6 +51,49 @@
   \clearpage
 
   \section*{Introduction}
+    In this project we implemented a fast Fourier transform algorithm on a Xilinx FPGA using VHDL. The primary motivation of our project was to digitally analyze musical signals, but the use cases for an FFT chip far surpass that specific use case. As a very general overview, our completed device functions by sampling an analog signal for a set amount of time and storing the data into an input buffer in BRAM. Next, the signal is is processed using an FT controller and a complex ALU and stored in an output buffer. Finally, a microcontroller can then read the output buffer over a standard SPI interface. From there the processed frequency domain data can be sent to a computer for further processing or any other device.
+
+  \section*{Theory}
+    To understand the discrete Fourier transform, one must first analyze its analogous continuous    time form.
+    This is written most simply as
+    \begin{align*}
+    &X(\omega) = \int_{-\infty}^{\infty} x(t) e^{-j \omega t}\,dt
+    \end{align*}
+    which defines the transform of a continuous time signal $f(t)$.
+    Without getting into too many details, it defines the signal as a combination of sinusoids,      making it a very useful tool for real world applications.\\
+
+    The discrete Fourier transform (DFT) is simply a reduction of the continuous Fourier transform   into a discrete sample space.
+    In other words, if we let $x_n$ represent a sampled version of the continuous time function      $x(t)$ with a total of $N$ samples, we can replace the integral with a summation over the series, as shown below.
+    \begin{align*}
+        &X_k = \sum\limits_{n=0}^{N-1} x_n e^{\frac{-j2\pi kn}{N}}
+    \end{align*}
+    As with the continuous time case, this series gives us a glimpse into the component elements of  our original signal.
+    However, it is rather costly to compute, requiring a time complexity of $O(N^2)$.
+    For each value $X_k$, a series of values from $n = 0$ to $N - 1$ must be generated and summed,   using up valuable computer resources.
+    Thus, calculating the DFT in this way is very inefficient, so we instead turned to the fast  Fourier transform.\\
+
+    In order to perform this operation more quickly, we utilized the Cooley-Tukey FFT algorithm.
+    However, the one requirement is that our input is strictly a power of 2.
+    That is because the algorithm works by recursively finding the FFT of smaller and smaller sample sizes of $x_n$, which arises from the fact that the transform itself is periodic.
+    The transform function can be broken into the sum of its even and odd components,
+    \begin{align*}
+        &X_k = \sum \limits_{m=0}^{N/2-1} x_{2m}e^{-\frac{2\pi i}{N} (2m)k} + \sum \limits_{m=0}^{N/ 2-1} x_{2m+1} e^{-\frac{2\pi i}{N} (2m+1)k}
+    \end{align*}
+    This equation can further be simplified by making the substitutions
+    \begin{align*}
+        &E_k = \sum \limits_{m=0}^{N/2-1} x_{2m}e^{-\frac{2\pi i}{N} (2m)k}
+        &O_k = \sum \limits_{m=0}^{N/2-1} x_{2m+1} e^{-\frac{2\pi i}{N/2} mk}
+    \end{align*}
+    giving us
+    \begin{align*}
+        &X_k = E_k + e^{-\frac{2\pi i}{N} k} O_k
+    \end{align*}
+    The expression $e^{-\frac{2\pi i}{N}k}$ is commonly called the \textit{twiddle factor}.
+    Furthermore, because of the periodicity of the transform, we can calculate respective even and   odd components simultaneously
+    \begin{align*}
+        &E_k = E_{k+\frac{N}{2}}
+        &O_k = O_{k+\frac{N}{2}}
+    \end{align*}
   
   \section*{Stuff That's Already Been Done (change section name plz)}
 
@@ -61,6 +104,18 @@
   \section*{Macro-Component Descriptions}
 
   \section*{Micro-Component Descriptions}
+    The final block diagram of our device is as follows:
+    \begin{figure}[H]
+      \centering
+      \includegraphics[trim=0 400 0 400,clip,width=140mm]{vhdl_fft.pdf}
+      \caption{Block diagram of the FFT chip}
+      \label{overflow}
+    \end{figure}
+    All of the blocks inside the FPGA device are referred to as micro-components. \\
+
+    TODO: DESCRIPTION OF EACH COMPONENT HERE
+
+  \section*{Steps Taken}
 
   \section*{Simulation Results}
 
