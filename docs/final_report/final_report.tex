@@ -147,15 +147,23 @@
       \caption{Block diagram of the FFT chip}
       \label{overflow}
     \end{figure}
-    All of the blocks inside the FPGA device are referred to as micro-components. \\
+    All of the blocks inside the FPGA device are referred to as micro-components.
 
-    TODO: DESCRIPTION OF EACH COMPONENT HERE
-
-  \section*{Steps Taken}
+    \begin{itemize}
+      \item Deterministic ADC: Provides a completely predictable ADC signal to test with and substituted for a real ADC while it was shipping.
+      \item SPI Mux: A simple multiplexer that selects between the external ADC and the deterministic ADC.
+      \item SPI Master: An OpenCore that implements an SPI master interface. This handles the control and reading of the SPI bus from either the deterministic ADC or the external ADC.
+      \item Capture Controller: This block reads samples from the SPI Master and stores the readings as complex numbers in the input buffer. The sample size is 512. It also communicates with the FT controller about when it finishes.
+      \item FT controller: This block actually executes the fast Fourier transfer algorithm whenever the capture controller indicates that the input buffer is valid.
+      \item Complex ALU: This block handles complex multiplications for the FT controller.
+      \item OUTBUF interpreter: This block facilitates the reading of the OUTBUF by feeding words into the SPI slave module.
+      \item SPI Slave: An OpenCore that implements an SPI slave interface. This handles the control and writing of the SPI bus, and it connects to an external microcontroller.
+    \end{itemize}
 
   \section*{Simulation Results}
 
   \section*{Results}
+    He seemed really excited about timing results so we should probably discuss this here.
 
   \section*{Roadblocks}
 
