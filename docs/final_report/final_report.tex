@@ -59,7 +59,7 @@
     To understand the discrete Fourier transform, one must first analyze its analogous continuous    time form.
     This is written most simply as
     \begin{align*}
-    &X(\omega) = \int_{-\infty}^{\infty} x(t) e^{-j \omega t}\,dt
+    &X(j\omega) = \int_{-\infty}^{\infty} x(t) e^{-j \omega t}\,dt
     \end{align*}
     which defines the transform of a continuous time signal $f(t)$.
     Without getting into too many details, it defines the signal as a combination of sinusoids,      making it a very useful tool for real world applications.\\
@@ -72,10 +72,10 @@
     As with the continuous time case, this series gives us a glimpse into the component elements of  our original signal.
     However, it is rather costly to compute, requiring a time complexity of $O(N^2)$.
     For each value $X_k$, a series of values from $n = 0$ to $N - 1$ must be generated and summed,   using up valuable computer resources.
-    Thus, calculating the DFT in this way is very inefficient, so we instead turned to the fast  Fourier transform.\\
+    Thus, calculating the DFT in this way is very inefficient, so we instead turn to the Fast  Fourier transform.\\
 
-    In order to perform this operation more quickly, we utilized the Cooley-Tukey FFT algorithm.
-    However, the one requirement is that our input is strictly a power of 2.
+    In order to perform this operation more quickly, we utilized the Cooley-Tukey FFT algorithm implemented through the Xilinx CoreGen FFT module.
+    One requirement is that our input is strictly a power of 2.
     That is because the algorithm works by recursively finding the FFT of smaller and smaller sample sizes of $x_n$, which arises from the fact that the transform itself is periodic.
     The transform function can be broken into the sum of its even and odd components,
     \begin{align*}
@@ -97,9 +97,18 @@
         &O_k = O_{k+\frac{N}{2}}
     \end{align*}
   
-  \section*{Stuff That's Already Been Done (change section name plz)}
-
   \section*{Motivation}
+    The FFT is a very common operation used in many digital signal processing tasks.
+    Digital signal processors are usually very highly tuned to perform a series of dedicated tasks quickly, and have very little flexability in the way of general purpose usage.
+    This is both a blessing and a curse, as they rarely need to be reprogrammed, but are also limited to the range of tasks they can accomplish.
+    High end DSPs utilize parallelism to complete mathematical calculations quickly.
+    Because of their dedicated nature, DSPs also tend to be rather costly, upwards of \$32 for a SHARC model chip from Analog Electronics.\\
+
+    FPGAs are primarily a large collection of configurable logic blocks that can be wired together to run in parallel, so why not try and use one in place of an expensive DSP?
+    By taking the heavy computations off of a typical CPU and putting the burden onto an FPGA, the processor could be freed up to execute any number of instructions until the heavy computations are complete.
+    This hybrid model has actually become quite popular in the past several years, and several products such as some of Intel's Xeon chips have FPGAs integrated onboard.
+    This can offset the costs for companies who formerly may have been inclined to build expensive ASICs and instead shift their focus onto a new platform.
+    A parallel CPU/FPGA integrated system is beyond the scope of this project, but instead a simple model using a Digilent Basys board and an Arduino are built to illustrate the principles.
 
   \section*{System Overview}
     A critical task in building our FFT device was converting an arbitrary waveform into the SPI signal input that the FPGA expected. This requires the use of a fast analog to digital converter. The Xilinx Spartan 3E FPGA does not come with an onboard ADC. Because of this, a large percentage of the work was actually electronics work done outside of the FPGA:
